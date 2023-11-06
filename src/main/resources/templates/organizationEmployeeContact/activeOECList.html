@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">			        
+			         <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.oec.heading}"></h4>                              
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                    <a th:href="@{/activeOECList}">                           
+                                   <button class="btn btn-secondary active"></button></a>
+                                    <a th:href="@{/inActiveOECList}">
+                        	       <button class="btn btn-secondary"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                    <a th:href="@{/oecForm}" class="btn add-btn plus" th:text="#{global.oec.addNew}"></a>
+						            <a th:href="@{/OECExcel}" class="btn add-btn plus" th:text="#{global.oec.excelExport}" style="margin-right:10px"></a>
+                                </div>
+                            </div>
+                        </div>
+				
+	
+               
+				<div class="col-sm-12 top">
+					<div class="card">						
+						
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display"  style="width:100%">
+									<thead>
+										<tr style="text-transform: uppercase;">
+											<th th:text="#{global.oec.orgEmpContactId}"></th>
+											<th th:text="#{global.oec.firstName}"></th>
+											<th th:text="#{global.oec.lastName}"></th>
+											<th th:text="#{global.oec.organization}"></th>
+											<th th:text="#{global.oec.email}"></th>
+											<th th:text="#{global.oec.mobile}"></th>
+											<th th:text="#{global.oec.address}"></th>
+											<th th:text="#{global.oec.action}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="oec : ${oec}">
+											<td th:text="${oec.orgEmpContactID}"></td>
+											<td th:text="${oec.firstName}"></td>
+											<td th:text="${oec.lastName}"></td>
+											<td th:text="${oec.organization}"></td>
+											<td th:text="${oec.emailId}"></td>
+											<td th:text="${oec.mobileNumber}"></td>
+											<td th:text="${oec.address}"></td>											
+											<td>
+												<a th:href="@{oecForm/{orgEmpContactID}(orgEmpContactID=${oec.orgEmpContactID})}" class="btn update"><em class="fa-solid fa-pen-to-square"></em></a> 
+												<a th:href="@{'/deactiveOEC/' + ${oec.orgEmpContactID}}" class="btn update"><em class="fa-solid fa-xmark"></em></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="outsideButton" style="text-align: center"><label> Export To <em class="fa-solid fa-arrow-turn-down" style="color:#7a7a7a; margin-left:3px;"></em></label></div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+</body>
+</html>

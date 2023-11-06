@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.payrollSlip.heading}">Payroll Slip</h4>
+          </div>
+        </div>
+      </div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="container-fluid">
+							<div class="row">
+							
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.empId}">Employee ID</label>
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empId}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.empId}"></span>
+										</label>
+
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.name}">Name</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.nameOfEmp}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.fullName}"></span>															
+										</label>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.department}">Department</label>
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.departName}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.departName}"></span>
+										</label>
+														 
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.designation}">Designation</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.designation}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.empWorkDetails.designation}"></span>
+										</label>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.payDate}">Pay Date</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">02/08/2022</label> 
+														
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.dateWorking}">Days Working</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">25</label>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.pfno}">PF No.</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">123456789013</label> 
+											
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.banlAccNo}">Bank A/C No.</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empSalaryDetails.salaryAccNo}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.empSalaryDetails.salaryAccNo}"></span>
+										</label>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.panNo}">Pan No.</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empPersonalDetails.panNumber}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.empPersonalDetails.panNumber}"></span>
+										</label> 
+											
+										<label class="col-lg-2 col-form-label" th:text="#{global.payrollSlip.dob}">DOB</label> 
+										<label class="col-lg-1 col-form-label">:</label> 
+										<label class="col-lg-3 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empPersonalDetails.birthDate}"></span>
+											<span th:each="emp : ${empDetails}" th:text="${emp.empPersonalDetails.birthDate}"></span>
+										</label>
+									</div>
+								</div>												
+							</div>
+
+							<div class="col-sm-12 form-group">
+								<div class="card">
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="table table-center text-nowrap table-bordered border-bottom dataTable no-footer">
+												<thead>
+													<tr>
+														<th th:text="#{global.payrollSlip.earning}">Earning</th>
+														<th th:text="#{global.payrollSlip.amount}">Amount</th>
+														<th th:text="#{global.payrollSlip.deduction}">Deduction</th>
+														<th th:text="#{global.payrollSlip.amount}">Amount</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td th:text="#{global.payrollSlip.basicSalary}">Basic Salary</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.basicSalary}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+															
+														<td th:text="#{global.payrollSlip.pf}">PF</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.empProvidentFundOrg}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.hra}">HRA</td>
+														<td >0 </td>
+														<td th:text="#{global.payrollSlip.incomeTax}">Income Tax</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.incomeTax}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.da}">Darness Allowance</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.dearnessAllowances}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														<td th:text="#{global.payrollSlip.leaveDeduction}">Leave Deduction</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.leavesRate}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														</tr>
+														<tr>
+														<td th:text="#{global.payrollSlip.conveyance}">Conveyance</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.conveyance}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.medicalBenefit}">Medical Benefit</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.medicalBenefit}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.overtimeRate}">Overtime Rate</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.overTimeRate}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.variablePay}">Variable Pay</td>
+														<td>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.variablePay}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td th:text="#{global.payrollSlip.extraAllowance}">Extra Allowance</td>
+														<td >0</td>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+												<thead>
+													<tr>
+														<th th:text="#{global.payrollSlip.totalEarning}">Total Earning</th>
+														<th>
+															<span th:each="emp : ${empPayroll}" th:text="${emp.grossSalary}"></span>
+															<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+														</th>
+														<th th:text="#{global.payrollSlip.totalDeduction}">Total Deduction</th>
+														<th>0</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-lg-3 col-form-label" th:text="#{global.payrollSlip.netPay}">NET PAY </label> 
+										<label class="col-lg-1 col-form-label"> : </label> 
+										<label class="col-lg-8 col-form-label">
+											<span th:each="emp : ${empPayroll}" th:text="${emp.netSalary}"></span>
+											<span th:each="notPresent : ${notPresent}" th:text="${notPresent}"></span>
+										</label> 
+												
+										<label class="col-lg-3 col-form-label" th:text="#{global.payrollSlip.amountInWord}">Amount in Words </label>
+										<label class="col-lg-1 col-form-label"> : </label> 
+										<label class="col-lg-8 col-form-label">Ten Thousand Five Hundred</label>
+									</div>
+								</div>
+							</div>											
+						</div>										
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

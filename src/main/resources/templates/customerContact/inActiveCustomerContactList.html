@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			  <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.customerContact.heading}"></h4>                                
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                  <a th:href="@{/activeCustomerContactList}">                            
+                                   <button class="btn btn-secondary"></button></a>
+                                  <a th:href="@{/inActiveCustomerContactList}">
+                        	       <button class="btn btn-secondary active"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                   <a th:href="@{/customerContactForm}" class="btn add-btn pull-right plus" th:text="#{global.customerContact.addNew}" ></a>
+						           <a th:href="@{/customerContactExcel}" class="btn add-btn pull-right plus"th:text="#{global.customerContact.excelExport}" style="margin-right:10px"></a>
+                                 </div>
+                            </div>
+                        </div>
+				
+				
+               
+				<div class="col-sm-12 top">
+					<div class="card">						
+						
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display"  style="width:100%">
+									<thead>
+										<tr style="text-transform: uppercase;">
+											<th th:text="#{global.customerContact.customerId}"></th>
+											<th th:text="#{global.customerContact.firstName}"></th>
+											<th th:text="#{global.customerContact.lastName}"></th>
+											<th th:text="#{global.customerContact.organization}"></th>
+											<th th:text="#{global.customerContact.branch}"></th>
+											<th th:text="#{global.customerContact.year}"></th>
+											<th th:text="#{global.customerContact.email}"></th>
+											<th th:text="#{global.customerContact.mobile}"></th>
+											<th th:text="#{global.customerContact.address}"></th>
+											<th th:text="#{global.customerContact.action}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="customerContact : ${customerContacts}">
+											<td th:text="${customerContact.customerId}"></td>
+											<td th:text="${customerContact.firstName}"></td>
+											<td th:text="${customerContact.lastName}"></td>
+											<td th:text="${customerContact.organization}"></td>
+											<td th:text="${customerContact.branch}"></td>
+											<td th:text="${customerContact.year}"></td>
+											<td th:text="${customerContact.emailId}"></td>
+											<td th:text="${customerContact.mobileNumber}"></td>
+											<td th:text="${customerContact.address}"></td>
+											<td>
+												<a th:href="@{'/activeCustomerContact/' + ${customerContact.customerId}}" class="btn update"><em class="fa-solid fa-check"></em></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="outsideButton" style="text-align: center"><label> Export To <em class="fa-solid fa-arrow-turn-down" style="color:#7a7a7a; margin-left:3px;"></em></label></div>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+</body>
+</html>

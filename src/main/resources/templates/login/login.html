@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- // Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags // -->
+    <title>CRM - Login</title>
+    <!-- // Favicon -->
+    <link href="../../../images/Ksv.png" th:href="@{/images/crm.png}" width="100%" rel="icon">
+    <!-- Favicon // -->
+
+    <!-- // Template CSS files -->
+    <link href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../../css/login.css" th:href="@{/css/login.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <!-- Template CSS files  // -->
+
+    <script type="text/javascript">
+        /*Login Validation*/
+        function loginValidateForm() {
+            var loginId = document.getElementById("loginId").value;
+            var password = document.getElementById("password").value;
+            //  var captcha = document.getElementById("captcha").value;
+
+            if (!loginId == null || loginId != "") {
+                document.getElementById("blankMsg2").innerHTML = "";
+            } else {
+                document.getElementById("blankMsg2").innerHTML = "Login ID must be required";
+                return false;
+            }
+
+            if (!password == null || password != "") {
+                document.getElementById("blankMsg3").innerHTML = "";
+            } else {
+                document.getElementById("blankMsg3").innerHTML = "Password must be required";
+                return false;
+            }
+
+            <!-- if (!captcha == null || captcha != "") {     
+               document.getElementById("blankMsg4").innerHTML = "";   
+            } else {
+               document.getElementById("blankMsg4").innerHTML = "Captcha must be required";
+              return false;
+            }-->
+        }
+    </script>
+</head>
+
+<body>
+    <!-- // Preloader -->
+    <div id="nm-preloader" class="nm-aic nm-vh-md-100">
+        <div class="nm-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- Preloader // -->
+
+    <main id="page-content" class="d-flex nm-aic nm-vh-md-100">
+        <!-- // Form side -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-6 offset-xl-3 nm-st nm-st-md">
+                    <form th:action="@{/loginSuccess}" method="POST" th:object="${userMst}"
+                        onsubmit="return loginValidateForm()" autocomplete="off">
+                        <div class="nm-mb-2 nm-mb-md-2">
+                            <a href="login-25.html" class="fxt-logo"><img src="images/crm.png" alt="Logo"></a>
+                        </div>
+
+                        <div class="input-group nm-gp input-container">
+                           <!-- <span class="nm-gp-pp"><i class="fas fa-user"></i></span>-->
+                            <input type="text" class="animated-input" th:field="*{loginId}"
+                                style="text-transform: uppercase;">
+                            <span class="input-highlight"></span>
+                            <label class="input-label">User ID</label>
+                        </div>
+                        <span class="red" id="blankMsg2"></span>
+
+                        <div class="input-group nm-gp input-container">
+                            <!--<span class="nm-gp-pp"><i class="fas fa-lock"></i></span>-->
+                            <input th:field="*{password}" type="password" class="animated-input" autocomplete="off"
+                                aria-label="Password">
+                            <span class="input-highlight"></span>
+                            <label class="input-label">Password</label>
+                        </div>
+                        <span class="red" id="blankMsg3"></span>
+                        
+                        <th:block th:if="${param.otp == null}">
+							<div class="input-group nm-gp input-container">
+                            <div>
+                                <img th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" width="140px"/>
+                            </div>
+                            </div>
+                            <div class="input-group nm-gp input-container">
+                           
+                                <span class="nm-gp-pp"><i class="fa fa-refresh"></i></span>
+                                <input type="hidden" th:field="*{hiddenCaptcha}" name="hiddenCaptcha" />
+                                <input class="animated-input" type="text" placeholder="Captcha" th:field="${userMst.captcha}" name="captcha">
+                            </div>
+                            <span class="red" id="blankMsg4"></span>
+                           
+                        </th:block>
+
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="input-group nm-gp">
+                            <button type="submit" class="btn btn-primary nm-hvr nm-btn-1" style="width: 100%;"
+                                th:text="#{global.lbl.login}">Log
+                                In</button>
+                        </div>
+
+                        <div class="row nm-row-ct">
+                            <a class="nm-fs-2 nm-fw-bd" th:href="@{/forgot}" th:text="#{global.lbl.forgetPass}">Forgot
+                                Password?</a>
+                        </div>
+
+                        <div class="row nm-row-ct nm-tp-5">
+                            <p> All Rights Reserved. © 2021 Design & Developed By <a class="heading"
+                                    th:href="@{https://ksvsofttech.com/}" target="_blank"
+                                    aria-label="Nimoy">KSVSoftTech</a></p>
+                            <!-- <p>
+                                © 2020 All Rights Reserved. <a class="heading" href="../index.html"
+                                    aria-label="Nimoy">KSVSoftTech</a>
+                            </p>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Form Side // -->
+
+        <!-- // Non-form side -->
+        <div id="non-form-side" class="col-lg-6 col-xl-6 d-none d-lg-flex nm-aic nm-vh-100">
+            <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="info">
+                <div class="info-text">
+                    <h1 th:text="#{global.lbl.welcome}">Welcome <span th:text="#{global.lbl.crm}">to CRM</span></h1>
+                </div>
+                <p th:text="#{global.lbl.msg}"></p>
+            </div>
+
+            <div class="overlay"></div>
+
+            <!--<div class="lngg">
+             <select id="locales" class="form-control rounded-pill form-control-lg-sm">
+                <option value="" disabled selected th:text="#{global.lbl.language}">LANGUAGE</option>
+                <option value="en" th:text="#{global.lang.en}">English</option>
+				<option value="hi" th:text="#{global.lang.hi}">Hindi</option>
+             </select>
+         </div>-->
+        </div>
+
+
+        <!-- Non-form Side // -->
+    </main>
+
+
+    <script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+    <script src="../../../js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script src="../../../js/script.js" th:src="@{/js/script.js}"></script>
+
+    <!-- ======================================================= -->
+    <!-- // Setting to allow preview of different color variants -->
+    <!-- ======================================================= -->
+    <div id="settings"
+        style="position: fixed; z-index: 999; top: 20%; right: 0%; width: 40px; height: 40px; background-color: #000; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <i class="fa-solid fa-gear"></i>
+        <div id="colors"
+            style="position: absolute; top: 40px; left: 40px; width: 40px; height: 100px; background-color: rgb(0, 0, 0); transition: all 0.2s ease 0s;">
+            <div class="toggle-container">
+                <div class="btn-group">
+                    <button type="button" class="btn btn_6" onclick="setTheme('logo')"></button>
+                    <button type="button" class="btn btn_2" onclick="setTheme('beige')"></button>
+                    <button type="button" class="btn btn_3" onclick="setTheme('burgundy')"></button>
+                    <button type="button" class="btn btn_4" onclick="setTheme('fuchsia')"></button>
+                    <button type="button" class="btn btn_5" onclick="setTheme('grey')"></button>
+                    <button type="button" class="btn btn_1" onclick="setTheme('dark')"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Theme Switcher
+        function setTheme(theme) {
+            const body = document.body;
+            body.setAttribute('data-theme', theme);
+        }
+    </script>
+
+    <script>
+        document.getElementById("colors").style.transition = 'all 0.2s';
+        document.getElementById("settings").addEventListener("click", () => {
+            let leftPosition = document.getElementById("colors").style.left;
+
+            if (leftPosition == '40px') {
+                document.getElementById("colors").style.left = '0px';
+            } else {
+                document.getElementById("colors").style.left = '40px';
+            }
+        });
+    </script>
+    <!-- ======================================================= -->
+    <!-- Setting to allow preview of different color variants // -->
+    <!-- ======================================================= -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption != '') {
+                    window.location.replace('/ksvsofttech/login?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

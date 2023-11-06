@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+ 		<div class="container-fluid">
+			 <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.tagkra.title}">Tag KRA</h4>
+          </div>
+        </div>
+      </div>
+			<!-- <div class="col-sm-12">
+				<h4 class="cards-title" th:text="#{global.tagkra.title}">Tag KRA</h4>
+				</div>
+				
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div> -->
+			<form onsubmit="return tagKRAValidate()" th:action="@{/tagKRA}" th:object="${empKRA}" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">										
+									<div class="col-xl-12">
+										<input type="hidden" name="depId" th:each="emp :${empBasicDetail}" th:value="${emp.departName}">
+										<input type="hidden" name="empId" th:each="emp :${empBasicDetail}" th:value="${emp.empId}">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tagkra.kraname}">KRA Name</label>
+											<div class="col-lg-4">
+												<select class="form-control" id="kraI" name="kraI" th:field="*{kraI}">
+													<option value="" th:text="#{global.tagkra.select}">Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+												<span class="red" id="blankMsg"></span> 												
+											</div>
+										</div>
+											
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tagkra.weightage}">Weightage</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" id="weightageI"  name="weightageI" th:field="*{weightageI}">
+												<span class="red" id="blankMsg2"></span>
+											</div>																					
+										</div>	
+									</div>																							
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a th:each="emp :${empBasicDetail}" th:href="@{/tagKRAReqList/{empId}(empId=${emp.empId})}" class="btn btn-outline-secondary"><em class="fa fa-chevron-left"></em>
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" th:text="#{global.tagkra.submit}">Submit</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+		</div> 
+		</div>
+</body>
+</html>

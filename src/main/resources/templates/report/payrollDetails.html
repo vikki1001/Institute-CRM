@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">	
+		<div class="container-fluid">
+				<div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.payroll.heading}">Payroll Details Report</h4>
+			
+				<input type="hidden" id="dtTitle" th:value="#{global.payroll.heading}">	
+          </div>
+        </div>
+						
+				<div class="col-sm-12 top">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.payroll.empId2}">Employee ID</th>
+											<th th:text="#{global.payroll.date}">Date</th>
+											<th th:text="#{global.payroll.department}">Department</th>
+											<th th:text="#{global.payroll.salary}">Salary</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="payroll : ${payrollSlipList}">
+											<td th:text="${payroll.empBasicDetails.empId +' - '+payroll.empBasicDetails.fullName}"></td>
+											<td th:text="${payroll.date}"></td>			
+											<td th:text="${payroll.empBasicDetails.departName}"></td>
+											<td th:text="${payroll.netSalary}"></td>																		
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="outsideButton"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

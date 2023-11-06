@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+                <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.orgContact.title}"></h4>                                
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                  <a th:href="@{/activeOrgBranchList}">                   
+                                   <button class="btn btn-secondary"></button></a>
+                                    <a th:href="@{/inActiveOrgBranchList}">
+                        	       <button class="btn btn-secondary active"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                   <a th:href="@{/addBranchesInOrg}" class="btn add-btn plus" th:text="#{global.message.addNew}"></a>
+                                </div>
+                            </div>
+                        </div>
+               
+				<div class="col-sm-12 top">
+					<div class="card">						
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display"  style="width:100%">
+									<thead>
+										<tr style="text-transform: uppercase;">
+											<th >Id</th>
+											<th >Branch Name</th>
+											<th>Branch Type</th>
+											<th th:text="#{global.message.action}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="list : ${list}">
+											<td th:text="${list.branchId}"></td>
+											<td th:text="${list.branchName}"></td>
+											<td th:text="${list.branchType}"></td>
+											<td>												
+												<a th:href="@{'/activeOrgBranchList/' + ${list.id}}" class="btn update">
+												 <em class="fa-solid fa-check"></em></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="outsideButton" style="text-align: center"><label> Export To <em class="fa-solid fa-arrow-turn-down" style="color:#7a7a7a; margin-left:3px;"></em></label></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

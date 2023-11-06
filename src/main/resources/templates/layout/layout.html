@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" th:href="@{/images/ksvFavicon.png}" href="../../../images/ksvFavicon.png">
+</head>
+<body>
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+
+	<div id="main-wrapper">
+		<div class="header">
+			<span th:replace="fragments/header :: header" />
+		</div>
+
+		<div class="quixnav">
+			<div class="quixnav-scroll">
+				<div class="quixnav menu">
+					<span th:replace="fragments/menu :: menus" />
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<span layout:fragment="content" />
+		</div>
+		<!-- <div class="footer">
+			<span th:replace="fragments/footer :: footer" />
+		</div> -->
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+	<!-- Main JS -->
+	<script src="../../../vendor/global/global.min.js" th:src="@{/vendor/global/global.min.js}"></script>
+	<script src="../../../js/quixnav-init.js" th:src="@{/js/quixnav-init.js}"></script>
+	<script src="../../../js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+	<!-- VectorMap -->
+	<script src="../../../vendor/chart.js/Chart.bundle.min.js" th:src="@{/vendor/chart.js/Chart.bundle.min.js}"></script>
+	<!-- Owl Carousel -->
+	<script src="../../../vendor/owl-carousel/js/owl.carousel.min.js" th:src="@{/vendor/owl-carousel/js/owl.carousel.min.js}"></script>
+	<!-- Counter Up -->
+	<script src="../../../vendor/jqvmap/js/jquery.vmap.min.js" th:src="@{/vendor/jqvmap/js/jquery.vmap.min.js}"></script>
+	<script src="../../../vendor/jqvmap/js/jquery.vmap.usa.js" th:src="@{/vendor/jqvmap/js/jquery.vmap.usa.js}"></script>
+
+ 	<!-- include summernote js -->
+    <script src="../../../summernote/summernote-bs4.js" th:src="@{/summernote/summernote-bs4.js}"></script>
+ 
+	<!-- Other Validation -->
+	<script src="../../../js/script.js" th:src="@{/js/script.js}"></script>
+	<script src="../../../js/sweet.js" th:src="@{/js/sweet.js}"></script>
+	
+
+	<!-- Multi-Step Form -->
+<!-- 	<script src="../../../js/multi-step-form/jquery.validate.min.js" th:src="@{/js/multi-step-form/jquery.validate.min.js}"></script>
+	<script src="../../../js/multi-step-form/validation.js" th:src="@{/js/multi-step-form/validation.js}"></script>
+	<script src="../../../js/multi-step-form/multi-form.js" th:src="@{/js/multi-step-form/multi-form.js}"></script> -->
+
+	<!-- DataTable -->
+	<script src="../../../js/datatable/jquery.dataTables.min.js" th:src="@{/js/datatable/jquery.dataTables.min.js}"></script>
+	<script src="../../../js/datatable/dataTables.buttons.min.js" th:src="@{/js/datatable/dataTables.buttons.min.js}"></script>
+	<script src="../../../js/datatable/buttons.html5.min.js" th:src="@{/js/datatable/buttons.html5.min.js}"></script>
+	<script src="../../../js/datatable/jszip.min.js" th:src="@{/js/datatable/jszip.min.js}"></script>
+	<script src="../../../js/datatable/pdfmake.min.js" th:src="@{/js/datatable/pdfmake.min.js}"></script>
+	<script src="../../../js/datatable/vfs_fonts.js" th:src="@{/js/datatable/vfs_fonts.js}"></script>
+	<script src="../../../js/datatable/buttons.print.min.js" th:src="@{/js/datatable/buttons.print.min.js}"></script>
+ 
+	  <script>
+	     /*  $('#summernote').summernote({
+	        placeholder: 'Enter description here...',
+	        tabsize: 2,
+	        height: 120,
+	        toolbar: [
+	          ['style', ['style']],
+	          ['font', ['bold', 'underline', 'clear']],
+	          ['color', ['color']],
+	          ['para', ['ul', 'ol', 'paragraph']],
+	          ['table', ['table']],
+	          ['insert', ['link', 'picture', 'video']],
+	          ['view', ['fullscreen', 'codeview', 'help']]
+	        ]
+	      }); */
+	      
+	      $(document).ready(function() {
+	    	    $('#description').summernote();
+	    	});
+
+	    </script>
+ 
+  
+ <script>
+ 		$('#view').click(function(){
+			 var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			 
+ 			var getMonth = document.getElementById("month").value;
+ 			var getYear = document.getElementById("ddlYears").value;
+ 			console.log("MONTH....."+ getMonth);
+ 			console.log("YEAR......"+ getYear);
+ 			
+ 			$.ajax({
+ 				type : 'GET',
+ 				contextType : 'Application/json',
+ 				url : contextPath + '/payrollSlip',
+ 			    data : {
+ 			    	view : true,
+ 			    	month : getMonth,
+ 			    	year : getYear
+ 			    },
+ 			    success : function(data){
+ 			    	 $('#testpayroll').html(data);
+ 			    	 $('#modalGrid').modal('show');
+ 			    	
+ 			    }
+ 			});
+ 		});
+
+ </script>
+
+<script>
+$(document).ready(function(){
+  	$('#excelSubmit').click(function(){
+  		var excelAssetsData = $('excelAssets').val();
+  		console.log("check excel  validations ");
+  		console.log("Excel data.."+ excelAssetsData);
+  		
+  		if(!excelAssetsData == null || excelAssetsData!=""){
+  			document.getElementById("blankMsg").innreHTML ="";
+  		}else{
+  			document.getElementById("blankMsg").innreHTML = "Excel File must be required";
+  		}
+  		
+  	});
+});
+</script>
+
+	<script>
+		/* DataTable */
+		$(document).ready(function() {
+			var table;
+			$('#datatable').DataTable({
+				dom : 'Bfrtip',							  
+				  buttons: [
+				      {
+				        extend: 'csv',
+				        text: 'Export CSV',
+				        className: 'export-csv-button',
+				      },
+				      {
+				        extend: 'excel',
+				        text: 'Export Excel',
+				        className: 'export-excel-button',
+				      },
+				    ],
+				 initComplete: function() {
+				      $('.export-csv-button').hide();
+				      $('.export-excel-button').hide();
+				    }
+			})			
+		});
+	</script>
+	
+	<script>
+		/* DataTable_ */
+		$(document).ready(function() {
+			var table;
+			$('#datatable_').DataTable({
+				"bPaginate": false,
+			    "bLengthChange": false,
+			    "bFilter": false,
+			    "bInfo": false,
+			    "bAutoWidth": false 
+			})			
+		});
+	</script>
+	
+	<script>
+		/* DataTable_ */
+		$(document).ready(function() {
+			var table;
+			$('#datatable__').DataTable({
+				"bPaginate": false,
+			    "bLengthChange": false,
+			    "bFilter": false,
+			    "bInfo": false,
+			    "bAutoWidth": false 
+			})			
+		});
+	</script>
+	<script>
+		/* DataTable_ */
+		$(document).ready(function() {
+			var table;
+			$('#datatable___').DataTable({
+				"bPaginate": false,
+			    "bLengthChange": false,
+			    "bFilter": false,
+			    "bInfo": false,
+			    "bAutoWidth": false 
+			})			
+		});
+	</script>
+	
+	<script>
+		/* DataTable with Export */
+		$(document).ready(function() {			
+			$("#datatable-buttons")
+				.DataTable({
+					dom : 'Bfrtip',
+					lengthChange: !1, 
+				buttons : [ {
+					extend : 'excelHtml5',
+					text:      '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'Excel',
+					footer : true,
+					title : function() {
+						return $('#dtTitle').val()
+					}
+				}, {
+					extend : 'pdfHtml5',
+					text:      '<i class="fas fa-file-pdf"></i>',
+                    titleAttr: 'PDF',
+					download : 'open',
+					footer : true,
+					title : $('#dtTitle').val(),
+					customize : function(doc) {
+						doc.styles.title = {
+							color : 'black',
+							fontSize : '25',
+							background : 'white',
+							alignment : 'center'
+						}
+					}
+				}],
+				lengthChange: true,
+               searching: false
+			})
+			.buttons().container().appendTo("#outsideButton");
+		});
+	</script>
+
+	<script>
+		/* Future Date Validation */
+		var today = new Date().toISOString().split('T')[0];
+		document.getElementsByName("from")[0].setAttribute('max', today);
+		document.getElementsByName("to")[0].setAttribute('max', today);
+	</script>
+
+	<script>		
+		/* Reset & Change Password Validation  */
+		const pswrd_1 = document.querySelector("#pswrd_1");
+		const pswrd_2 = document.querySelector("#pswrd_2");
+		const errorText = document.querySelector(".error-text");
+		const showBtn = document.querySelector(".show");
+		const btn = document.querySelector("button");
+
+		function active() {
+			if (pswrd_1.value.length >= 6) {
+			//	btn.removeAttribute("disabled", "");
+				btn.classList.add("active");
+				pswrd_2.removeAttribute("disabled", "");
+			} else {
+		//		btn.setAttribute("disabled", "");
+				btn.classList.remove("active");
+				pswrd_2.setAttribute("disabled", "");
+			}
+		}
+
+		function myFunction() {
+			if (pswrd_1.value != pswrd_2.value) {
+				 errorText.style.display = "block";
+				errorText.classList.remove("matched");
+				errorText.textContent = "new Password & Confirm New Password not match";
+				return false;
+			} else if(pswrd_1.value == pswrd_2.value && !pswrd_1.value == null || pswrd_1.value != ""){
+				errorText.style.display = "block";
+				errorText.classList.add("matched");
+				errorText.textContent = "Confirm Password Matched";
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function active_2() {
+			if (pswrd_2.value != "") {
+				showBtn.style.display = "block";
+				showBtn.onclick = function() {
+					if ((pswrd_1.type == "password") && (pswrd_2.type == "password")) {
+						pswrd_1.type = "text";
+						pswrd_2.type = "text";
+						this.textContent = "Hide";
+						this.classList.add("active");
+					} else {
+						pswrd_1.type = "password";
+						pswrd_2.type = "password";
+						this.textContent = "Show";
+						this.classList.remove("active");
+					}
+				}
+			} else {
+				showBtn.style.display = "none";
+			}
+		}
+	</script>
+
+	<script>	
+		/* Falsh Message TimeOut */
+		$(function() {
+			$('#alertMessage').delay(5000).fadeOut();
+		});
+	</script>
+
+	<!-- <script>
+		$('input.deletable').wrap('<span class="deleteicon"></span>').after(
+				$('<span>x</span>').click(function() {
+					$(this).prev('input').val('').trigger('change').focus();
+				}));
+	</script> -->
+
+
+
+	<script>
+	/* Check-In Enable & Disable Button in Attendance */
+		function disableButton() {
+			var x = document.getElementById("enable");
+			var y = document.getElementById("disable");
+
+			x.style.display = "none";
+			y.style.display = "block";
+		}
+	</script>
+
+
+	<script>
+	
+	var x;
+	var y;
+	var interval;
+	var progressWidth;
+	var progressBar;
+	const time = 32400;
+	 var progWidth;
+ 	 var tempBar;
+ 	 var interval1 ;
+	
+		/* For Check-In & Check-Out using Ajax Dashboard*/
+		$('#enable').click(function(){
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			/* clearInterval(y);
+			console.log("clearInterval  "+ progWidth); */
+			/* let notes = document.getElementById("notes").value; */
+			let notes = $('#notes').val();
+			
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : contextPath + '/saveCheckIn',
+				data :{
+					addNotes : notes 
+				},
+				success : function(data) {
+					console.log("CHECKIN SUCCESS ::: ", data);
+					onSuccess(data);
+					move();
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		});
+
+		function onSuccess(data) {
+			let html = `<input class="btn66 btn-primary punch-btn" type="button" value="CheckOut" id="disable" onclick="enableButton1()"/>`
+			$('#disableajaxbutton1').html(html);
+		}
+
+		/* CheckIn DateTime */
+		var countDownDate = new Date(document.getElementById("checkinDateTime").value);
+		console.log("CHECKINTIME ::: = " + countDownDate);
+		
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+			
+			console.log("Before refress page.....");
+			// Get today's date and time
+			var now = new Date().getTime();
+			// Find the distance between now and the count down date
+			var distance = now - countDownDate;
+			  
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	
+			if(countDownDate != 'Invalid Date') {
+				// Output the result in an element with id="demo"
+				document.getElementById("coundownStart").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+				document.getElementById("coundownStart02").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+			}		
+
+			// If the count down is over, write some text 
+			if (distance < 0) {
+				clearTimeout(x);
+				clearInterval(x);
+				document.getElementById("coundownStart").innerHTML = "EXPIRED";
+				document.getElementById("coundownStart02").innerHTML = "EXPIRED";
+			}
+		}, 1000);
+	
+			 function move() {
+				
+				 console.log("Inside move function");
+					interval = 0;
+					// Update the count down every 1 second
+					 x = setInterval(
+							function() {
+								
+								progressBar = document.querySelector(".progresse-bar");
+								 
+								interval++;
+								 progressWidth = (interval/time) * 100;
+								if(interval <= time){
+								 progressBar.style.width = progressWidth + "%";
+								}
+								else{
+									clearInterval(x);
+								}
+								
+							}, 1000);
+			 }	
+					
+					
+	</script>
+
+	<script>
+		/*Check-Out Enable & Disable Button Dashboard*/
+		$('#disable').click(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : contextPath + '/saveCheckOut',
+				data : {
+					width : progressWidth
+				},
+				success : function(data) {
+					console.log("CHECKOUT SUCCESS ::: ", data);
+					var x = document.getElementById("disableajaxbutton");
+					x.style.display = "none";
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+			clearInterval(x);
+		});
+	</script>
+
+	<script>
+		/*Check-Out 2 Enable & Disable Button Dashboard */
+		function enableButton1() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : contextPath + '/saveCheckOut',
+				data : {
+					width : progressWidth
+				},
+				success : function(data) {
+					console.log("CHECKOUT SUCCESS ::: ", data);
+					var x = document.getElementById("disableajaxbutton1");
+					x.style.display = "none";
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});clearInterval(x);
+		}
+	</script>
+
+	<script>
+		$("#enable").click(function() {
+							// Set the date we're counting down to
+							var countDownDate = new Date().getTime();
+							console.log("CHECKINTIME ::: = " + countDownDate);
+							// Update the count down every 1 second
+							var x = setInterval(
+									function() {
+									
+										// Get today's date and time
+										var now = new Date().getTime();
+										// Find the distance between now and the count down date
+										
+										var distance = now - countDownDate;
+										
+										// Time calculations for days, hours, minutes and seconds
+										var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+										var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+										var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+										var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+										// Output the result in an element with id="demo"
+										document.getElementById("coundownStart1").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+										document.getElementById("coundownStart2").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+
+										// If the count down is over, write some text 
+										if (distance < 0) {
+											clearInterval(x);
+											document.getElementById("coundownStart1").innerHTML = "EXPIRED";
+											document.getElementById("coundownStart2").innerHTML = "EXPIRED";
+										}
+										
+							
+									}, 1000);
+
+							$('#disable').click(function() {
+								clearTimeout(x);
+								clearInterval(x);
+							});
+						});
+	</script>
+
+	<!-- CheckInCheckOut End -->
+
+	<!-- Upload Image by Employee (empProfile) -->
+
+
+
+	<script>
+	 
+
+	    var x;
+	    var y; 
+	    function progressBar(){
+	    	
+	   	 var countinDateTime;
+		 var checkoutDateTime;
+	    	
+	    	 countinDateTime = new Date(document.getElementById("checkinDateTime").value);
+			console.log("CHECKINTIME ::: = " + countinDateTime);
+	    	
+			 checkoutDateTime = new Date(document.getElementById("checkoutDateTime").value);
+			console.log("CHECKOUTTIME ::: = " + checkoutDateTime);
+	    	
+			progressBar = document.querySelector(".progresse-bar");
+			
+					/* if(countinDateTime == 'Invalid Date'){
+						
+						
+					 	 var time = 32000;
+					 	 
+					 $(document).ready(function(){
+						 
+					 	var date = new Date();
+					 	 console.log("Hours..........."+ date.getHours());
+					 	if (date.getHours() == 14) {
+					 	 	 console.log("Hours @..........."+ date.getHours());
+					 		  	beforechecking();
+					 		} 
+					 });
+					 
+					  function beforechecking(){
+						 	 console.log("INSIDE FUNCTION..........");
+						 	
+						 	y = setInterval(
+									function() {
+										var desiredTime = new Date();
+
+										// Set the desired hour, minute, and second
+										desiredTime.setHours(10);
+										desiredTime.setMinutes(00);
+										desiredTime.setSeconds(00);
+										
+										console.log("desiredTime   "+ desiredTime);
+								        
+										var now = new Date().getTime();
+										
+										var distance = now - desiredTime; 
+										
+										console.log("distance...  " +distance);
+										
+										// Time calculations for days, hours, minutes and seconds
+										var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+										var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+										var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+										var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+									
+										var hoursConvertIntoSec = hours * 60 * 60; 
+										var minutesConvertIntoSec = minutes * 60;
+										var secondsConvertIntoSec = seconds;
+										var totalSecCount = hoursConvertIntoSec + minutesConvertIntoSec +secondsConvertIntoSec;
+										
+										console.log("totalSecCount  "+ totalSecCount);
+										
+										tempBar = document.querySelector(".progresse-bar");
+										interval1 =  totalSecCount;
+										interval1++;
+										progWidth = (interval1/time) * 100;
+										console.log("progWidth"+ progWidth);
+										if(interval1 <= time){
+											tempBar.style.width = progWidth + "%";
+											intervalValue = interval1;
+											console.log("intervalValue ......."+ intervalValue);
+										}
+										else{
+											clearInterval(y);
+										}
+										
+									}, 1000);
+					  }
+						
+					} */			
+				 if(checkoutDateTime != 'Invalid Date'){
+						console.log("Inside second if.........");
+						var distance = checkoutDateTime - countinDateTime;
+						
+						var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+						var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+						var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+						var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+					
+						var hoursConvertIntoSec = hours * 60 * 60; 
+						var minutesConvertIntoSec = minutes * 60;
+						var secondsConvertIntoSec = seconds;
+						var totalSecCount = hoursConvertIntoSec + minutesConvertIntoSec +secondsConvertIntoSec;
+						
+						interval = totalSecCount;
+						offset = 10;
+						 progressWidth = (interval/time) * 100;
+						 progressBar.style.width = progressWidth + "%"; 
+					}			
+					else{
+						
+						x = setInterval(
+								function() {
+									console.log("Inside else.........");
+									// Get today's date and time
+									var now = new Date().getTime();
+									// Find the distance between now and the count down date
+									var distance = now - countDownDate;
+									// Time calculations for days, hours, minutes and seconds
+									var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+									var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+									var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+									var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+								
+									var hoursConvertIntoSec = hours * 60 * 60; 
+									var minutesConvertIntoSec = minutes * 60;
+									var secondsConvertIntoSec = seconds;
+									var totalSecCount = hoursConvertIntoSec + minutesConvertIntoSec +secondsConvertIntoSec;
+									
+									interval++;
+									interval = totalSecCount;
+									 progressWidth = (interval/time) * 100;
+									 progressBar.style.width = progressWidth + "%"; 
+									
+								}, 1000);
+					}			
+			
+			
+	    }
+	</script> 
+	
+	<script>
+		$(document).ready(function() {
+			$("#upload-file-input").on("change", uploadFile);
+
+			var readURL = function(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('.profile-pic').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$(".file-upload").on('change', function() {
+				readURL(this);
+			});
+
+			$(".upload-button").on('click', function() {
+				$(".file-upload").click();
+			});
+		});
+
+		function uploadFile() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			var form = $("#upload-file-form")[0];
+			var data = new FormData(form);
+			$.ajax({
+				url : contextPath + "/uploadImage",
+				type : "POST",
+				data : data,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				cache : false,
+				success : function(data) {
+					window.location.reload();
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		}
+	</script>
+
+	<script>
+		/* Add New Notification Red Alert */
+		$(document).ready(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+					$.ajax({
+						url : contextPath + "/addNewReqNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<script>
+		/* Exit Activity Notification Red Alert */
+		$(document).ready(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+					$.ajax({
+						url : contextPath + "/exitActivityNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<script>
+		/* Expense Notification Red Alert */
+		$(document).ready(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+					$.ajax({
+						url : contextPath + "/expenseNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<script>
+	/* Leave Notification Red Alert */
+	$(document).ready(function() {
+		var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+		
+				$.ajax({
+					url : contextPath + "/assetsNotificationAlert",
+					contentType : 'application/json',
+					type : "GET",
+					success : function(data) {
+						if (data == 'Unread') {
+							var element = document.getElementById("notification-red");
+							var data = element.classList.add("pulse-css");
+						} else {
+							//console.log("Read : ", data);
+						}
+					},
+					error : function(e) {
+						console.log("ERROR : ", e);
+					}
+				});
+			});
+	</script>
+
+	<script>
+		/* Leave Notification Red Alert */
+		$(document).ready(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+					$.ajax({
+						url : contextPath + "/leaveNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+	<!-- Attendance Start -->
+	<script>
+	function hideButton() {
+				var x = document.getElementById("checkIn");
+				var y = document.getElementById("checkOut");
+	
+				x.style.display = "none";
+				y.style.display = "block";
+			}
+	</script>
+
+	<script>
+		$('#checkIn').click(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : contextPath + '/saveCheckInAttendance',
+				success : function(data) {
+					console.log("CHECKIN SUCCESS ::: ", data);
+				//	onSuccess(data);
+					window.location.reload();
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		});
+
+		/* CheckIn DateTime */
+		var countDownDate = new Date(document.getElementById("checkinTime").value);
+		console.log("CHECKINTIME ::: = " + countDownDate);
+		
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+			// Get today's date and time
+			var now = new Date().getTime();
+			// Find the distance between now and the count down date
+			var distance = now - countDownDate;
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			if(countDownDate != 'Invalid Date') {
+				// Output the result in an element with id="demo"
+				document.getElementById("timeStart").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+			}		
+
+			// If the count down is over, write some text 
+			if (distance < 0) {
+				clearInterval(x);
+				document.getElementById("timeStart").innerHTML = "EXPIRED";
+			}
+		}, 1000);
+
+		$('#checkOut').click(function() {
+			clearTimeout(x);
+		});
+	</script>
+
+	<script>
+		/*Check-Out Enable & Disable Button Dashboard*/
+		$('#checkOut').click(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : contextPath + '/saveCheckOutAttendance',
+				success : function(data) {
+					console.log("CHECKOUT SUCCESS ::: ", data);
+					var x = document.getElementById("hideajaxbutton");
+					x.style.display = "none";
+					window.location.reload();
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+			clearInterval(x);
+		});
+	</script>
+
+	<script>
+		$("#checkIn").click(function() {
+							// Set the date we're counting down to
+							var countDownDate = new Date().getTime();
+							console.log("CHECKINTIME ::: = " + countDownDate);
+							// Update the count down every 1 second
+							var x = setInterval(
+									function() {
+										// Get today's date and time
+										var now = new Date().getTime();
+										// Find the distance between now and the count down date
+										var distance = now - countDownDate;
+										// Time calculations for days, hours, minutes and seconds
+										var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+										var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+										var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+										var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+										// Output the result in an element with id="demo"
+										document.getElementById("timeStart1").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+
+										// If the count down is over, write some text 
+										if (distance < 0) {
+											clearInterval(x);
+											document.getElementById("timeStart1").innerHTML = "EXPIRED";
+										}
+									}, 1000);
+
+							$('#checkOut').click(function() {
+								clearTimeout(x);
+							});
+						});
+	</script>
+
+	<!-- Attendance End -->
+
+	<!-- Slider JS Start -->
+	<script>
+                const slider = document.querySelector(".slider");
+                const nextBtn = document.querySelector(".next-btn");
+                const prevBtn = document.querySelector(".prev-btn");
+                const slides = document.querySelectorAll(".slide");
+                const slideIcons = document.querySelectorAll(".slide-icon");
+                const numberOfSlides = slides.length;
+                var slideNumber = 0;
+
+                //image slider next button
+                nextBtn.addEventListener("click", () => {
+                    slides.forEach((slide) => {
+                        slide.classList.remove("active");
+                    });
+                    slideIcons.forEach((slideIcon) => {
+                        slideIcon.classList.remove("active");
+                    });
+
+                    slideNumber++;
+
+                    if (slideNumber > (numberOfSlides - 1)) {
+                        slideNumber = 0;
+                    }
+
+                    slides[slideNumber].classList.add("active");
+                    slideIcons[slideNumber].classList.add("active");
+                });
+
+                //image slider previous button
+                prevBtn.addEventListener("click", () => {
+                    slides.forEach((slide) => {
+                        slide.classList.remove("active");
+                    });
+                    slideIcons.forEach((slideIcon) => {
+                        slideIcon.classList.remove("active");
+                    });
+
+                    slideNumber--;
+
+                    if (slideNumber < 0) {
+                        slideNumber = numberOfSlides - 1;
+                    }
+
+                    slides[slideNumber].classList.add("active");
+                    slideIcons[slideNumber].classList.add("active");
+                });
+
+                //image slider autoplay
+                var playSlider;
+
+                var repeater = () => {
+                    playSlider = setInterval(function () {
+                        slides.forEach((slide) => {
+                            slide.classList.remove("active");
+                        });
+                        slideIcons.forEach((slideIcon) => {
+                            slideIcon.classList.remove("active");
+                        });
+
+                        slideNumber++;
+
+                        if (slideNumber > (numberOfSlides - 1)) {
+                            slideNumber = 0;
+                        }
+
+                        slides[slideNumber].classList.add("active");
+                        slideIcons[slideNumber].classList.add("active");
+                    }, 4000);
+                }
+                repeater();
+
+                //stop the image slider autoplay on mouseover
+                slider.addEventListener("mouseover", () => {
+                    clearInterval(playSlider);
+                });
+
+                //start the image slider autoplay again on mouseout
+                slider.addEventListener("mouseout", () => {
+                    repeater();
+                });
+            </script>
+	<!-- Slider JS End -->
+
+	<script>
+	$('#nextButton').click(function() {
+		var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+		
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			url : contextPath + '/nextButton',
+			success : function(data) {
+				$('#nextWeek').html(data);
+				//console.log("Data ::: ", number);
+			},
+			error : function(e) {
+				console.log("ERROR : ", e);
+			}
+		});
+	});
+	</script>
+
+	<!-- 	<script>
+            setInterval(function() {
+                $.ajax({
+                    url: "/check-session",
+                    method: "GET",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data){
+                        if (data && data.length > 0) {
+                            window.location.replace("/login");
+                        }
+                    },
+                    error: function (data) {
+                        console.log("error");
+                        console.log(data);
+                    }
+                })
+            }, 60000);
+    </script> -->
+
+
+<!-- 	<script>
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("progresse-bar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+</script> -->
+
+<script>
+var today = new Date();
+
+$('#previousWeek1').click(function() {
+	var previousWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+	alert("Previous Starting Date - " + previousWeek);
+	
+	var endDate = new Date(previousWeek.getFullYear(), previousWeek.getMonth(), previousWeek.getDate() + 6);
+	alert("Previous End Date - " + endDate);
+	//document.getElementById("p1").innerHTML = previousWeek;
+
+});
+
+$('#nextWeek1').click(function() {
+	var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+	alert("Next - " + nextWeek);
+	document.getElementById("p2").innerHTML = nextWeek;
+
+});
+</script>
+
+<!-- Multistep Form Validation -->	
+
+<script>
+$(document).ready(function(){
+	console.log("Inside check the form validation");
+	$('#step1').show();
+	$('#step2').hide();
+	$('#step3').hide();
+	$('#step4').hide();
+	$('#step5').hide();
+	$('#step6').hide();
+	$('#step7').hide();
+	$('#step8').hide();
+	$('#step9').hide();
+});
+	
+	$('#next1').click(function(){
+		console.log("Inside next 1 ......");
+		if(validate1() == true){
+			$('#step2').show();
+			$('#step1').hide();
+			$('#step3').hide();
+			$('#step4').hide();
+			$('#step5').hide();
+			$('#step6').hide();
+			$('#step7').hide();
+			$('#step8').hide();
+			$('#step9').hide();
+		}
+		});
+	
+		$('#next2').click(function(){
+			console.log("Inside next 2 ......");
+			if(validate2() == true){
+				$('#step3').show();
+				$('#step1').hide(); 
+				$('#step2').hide();
+				$('#step4').hide();
+				$('#step5').hide();
+				$('#step6').hide();
+				$('#step7').hide();
+				$('#step8').hide();
+				$('#step9').hide();
+			}
+			});
+		
+			$('#next3').click(function(){
+				console.log("Inside next 3 ......");
+				if(validate3() == true){
+					$('#step4').show();
+					$('#step1').hide();
+					$('#step3').hide();
+					$('#step2').hide();
+					$('#step5').hide();
+					$('#step6').hide();
+					$('#step7').hide();
+					$('#step8').hide();
+					$('#step9').hide();
+				}
+				});
+				$('#next4').click(function(){
+					console.log("Inside next 4 ......");
+					if(validate4() == true){
+						$('#step5').show();
+						$('#step1').hide();
+						$('#step3').hide();
+						$('#step4').hide();
+						$('#step2').hide();
+						$('#step6').hide();
+						$('#step7').hide();
+						$('#step8').hide();
+						$('#step9').hide();
+					}
+					});
+					$('#next5').click(function(){
+						console.log("Inside next 5 ......");
+						if(validate5() == true){
+							$('#step6').show();
+							$('#step1').hide();
+							$('#step3').hide();
+							$('#step4').hide();
+							$('#step5').hide();
+							$('#step2').hide();
+							$('#step7').hide();
+							$('#step8').hide();
+							$('#step9').hide();
+						}
+						});
+						$('#next6').click(function(){
+							console.log("Inside next 6 ......");
+							if(validate6() == true){
+								$('#step7').show();
+								$('#step1').hide();
+								$('#step3').hide();
+								$('#step4').hide();
+								$('#step5').hide();
+								$('#step6').hide();
+								$('#step2').hide();
+								$('#step8').hide();
+								$('#step9').hide();
+							}
+							});
+							$('#next7').click(function(){
+								console.log("Inside next 7 ......");
+								if(validate7() == true){
+									$('#step8').show();
+									$('#step1').hide();
+									$('#step3').hide();
+									$('#step4').hide();
+									$('#step5').hide();
+									$('#step6').hide();
+									$('#step7').hide();
+									$('#step2').hide();
+									$('#step9').hide();
+								}
+								});
+								$('#next8').click(function(){
+									console.log("Inside next 8 ......");
+									if(validate8() == true){
+										$('#step9').show();
+										$('#step1').hide();
+										$('#step3').hide();
+										$('#step4').hide();
+										$('#step5').hide();
+										$('#step6').hide();
+										$('#step7').hide();
+										$('#step8').hide();
+										$('#step2').hide();
+									}
+									});
+									$('#previous2').click(function(){
+										console.log("Inside previous 2.....");
+								        	$('#step1').show();
+											$('#step2').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+
+									$('#previous3').click(function(){
+										console.log("Inside previous 3.....");
+								        	$('#step2').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+									$('#previous4').click(function(){
+										console.log("Inside previous 4.....");
+								        	$('#step3').show();
+											$('#step1').hide();
+											$('#step2').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+									$('#previous5').click(function(){
+										console.log("Inside previous   5 ....");
+								        	$('#step4').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step2').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+									$('#previous6').click(function(){
+										console.log("Inside previous 6 .....");
+								        	$('#step5').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step2').hide();
+											$('#step6').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+									$('#previous7').click(function(){
+										console.log("Inside previous 7 .....");
+								        	$('#step6').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step2').hide();
+											$('#step7').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+									$('#previous8').click(function(){
+										console.log("Inside previous 8.....");
+								        	$('#step7').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step2').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+								
+										});
+
+									$('#previous9').click(function(){
+										console.log("Inside previous 8.....");
+								        	$('#step7').show();
+											$('#step1').hide();
+											$('#step3').hide();
+											$('#step4').hide();
+											$('#step5').hide();
+											$('#step6').hide();
+											$('#step2').hide();
+											$('#step8').hide();
+											$('#step9').hide();
+										});	
+									
+									$('#submit').click(function (e) {
+										var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+										
+										e.preventDefault();
+										if (validate9() == true) {
+											console.log("Inside submit");
+											$.ajax({
+												type: "POST",
+												url: contextPath + "/saveEmployee",
+												data: $('#myform').serialize(),
+												success: function (data) {
+													console.log("Record Save Successfully....");
+												     $('#userMstMsg').html("Record Save Successfully").fadeIn('slow')
+												     $('#userMstMsg').delay(5000).fadeOut('slow');
+												     $('#userMstMsg').css('background','  #dcf0e2');
+												     $('#userMstMsg').css('border', ' 1px solid #dcf0e2');
+												     $('#userMstMsg').css('border-style', ' solid');
+												     $('#userMstMsg').css('border-radius', ' 15px');
+												     $('#userMstMsg').css('padding', ' 10px');
+												     $('#userMstMsg').css('color', ' gray');
+												     $('#userMstMsg').css('margin-left', ' 350px');
+												     setTimeout(function() {
+												    	 window.location = contextPath + '/activeEmpRegList';
+												    	}, 3000);
+													
+												}
+											});
+										}
+									}); 
+	
+	function validate1(){
+		
+		var coEmail = $('#coEmailId').val();
+		var tenantId = $('#tenantId').val();
+		var firstName = $('#firstName').val();
+		var lastName = $('#lastName').val();
+		var fullName = $('#fullName').val();
+		var departName = $('#departName').val();
+		var gender = $('#gender').val();
+		var grade = $('#grade').val();
+		
+		if (!coEmail == null || coEmail != "") {     
+	           document.getElementById("error1").innerHTML = "";   
+	    } else {
+	       document.getElementById("error1").innerHTML = "Email must be required";
+	      return false;
+	    }
+		if (coEmail.indexOf('@') <= 0) {
+			document.getElementById("error1").innerHTML = "like, user@gmail.com";
+			return false;
+		} if ((coEmail.charAt(coEmail.length - 4) != '.') && (coEmail.charAt(coEmail.length - 3) != '.')) {
+			document.getElementById("error1").innerHTML = "like, user@gmail.com ";
+			return false;
+		}
+		
+		
+		if (!tenantId == null || tenantId != "") {     
+	           document.getElementById("error2").innerHTML = "";   
+	    } else {
+	       document.getElementById("error2").innerHTML = "TenantId must be required";
+	      return false;
+	    }
+		
+		if (!firstName == null || firstName != "") {     
+	           document.getElementById("error3").innerHTML = "";   
+	    } else {
+	       document.getElementById("error3").innerHTML = "First name must be required";
+	      return false;
+	    }
+		
+		if (!lastName == null || lastName != "") {     
+	           document.getElementById("error4").innerHTML = "";   
+	    } else {
+	       document.getElementById("error4").innerHTML = "Last name must be required";
+	      return false;
+	    }
+		
+		if (!fullName == null || fullName != "") {     
+	           document.getElementById("error5").innerHTML = "";   
+	    } else {
+	       document.getElementById("error5").innerHTML = "Fullname must be required";
+	      return false;
+	    }
+		
+		if (!departName == null || departName != "") {     
+	           document.getElementById("error6").innerHTML = "";   
+	    } else {
+	       document.getElementById("error6").innerHTML = "Department must be required";
+	      return false;
+	    }
+		
+		if (!gender == null || gender != "") {     
+	           document.getElementById("error7").innerHTML = "";   
+	    } else {
+	       document.getElementById("error7").innerHTML = "Gender must be required";
+	      return false;
+	    }
+		
+		if (!grade == null || grade != "") {     
+	           document.getElementById("error8").innerHTML = "";   
+	    } else {
+	       document.getElementById("error8").innerHTML = "Grade must be required";
+	      return false;
+	    }
+	return true;
+	}
+   
+	function validate2(){
+		var phoneno = /^[0-9]{10}$/;
+		var panCard = /([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+		
+		var birthDate = $('#birthDate').val();
+		var placeOfBirth = $('#placeOfBirth').val();
+		var bloodGroup = $('#bloodGroup').val();
+		var contactNo = $('#contactNo').val();
+		var maritalStatus = $('#maritalStatus').val();
+		var religion = $('#religion').val();
+		var addharNumber = $('#addharNumber').val();
+		var panNumber = $('#panNumber').val();
+		var personalEmailId1 = $('#personalEmailId1').val();
+		
+		if (!birthDate == null || birthDate != "") {     
+	           document.getElementById("error9").innerHTML = "";   
+	    } else {
+	       document.getElementById("error9").innerHTML = "Birth Date must be required";
+	      return false;
+	    }
+		if ((birthDate.length != 10)) {
+			document.getElementById("error9").innerHTML = "like, 1996-05-25";
+			return false;
+		}
+		
+		if (!placeOfBirth == null || placeOfBirth != "") {     
+	           document.getElementById("error10").innerHTML = "";   
+	    } else {
+	       document.getElementById("error10").innerHTML = "Birth place must be required";
+	      return false;
+	    }
+		
+		if (!bloodGroup == null || bloodGroup != "") {     
+	           document.getElementById("error11").innerHTML = "";   
+	    } else {
+	       document.getElementById("error11").innerHTML = "Blood Group must be required";
+	      return false;
+	    }
+
+		if (!contactNo == null || contactNo != "" ) {     
+	           document.getElementById("error12").innerHTML = "";   
+	    } else {
+	       document.getElementById("error12").innerHTML = "Contact number must be required";
+	      return false;
+	    }
+		
+		if ((contactNo.length != 10)) {
+			document.getElementById("error12").innerHTML = "Must be 10 digits only";
+			return false;
+		}
+		
+		if (!maritalStatus == null || maritalStatus != "") {     
+	           document.getElementById("error13").innerHTML = "";   
+	    } else {
+	       document.getElementById("error13").innerHTML = "Marital Status must be required";
+	      return false;
+	    }
+		
+		if (!religion == null || religion != "") {     
+	           document.getElementById("error14").innerHTML = "";   
+	    } else {
+	       document.getElementById("error14").innerHTML = "Religion must be required";
+	      return false;
+	    }
+		
+		if (!addharNumber == null || addharNumber != "") {     
+	           document.getElementById("error15").innerHTML = "";   
+	    } else {
+	       document.getElementById("error15").innerHTML = "Aadhar Number must be required";
+	      return false;
+	    }
+		
+		if ((addharNumber.length != 12)) {
+			document.getElementById("error15").innerHTML = "Must be 12 Digits";
+			return false;
+		}
+
+		if (!panNumber == null || panNumber != "") {     
+	           document.getElementById("error16").innerHTML = "";   
+	    } else {
+	       document.getElementById("error16").innerHTML = "Pan Number must be required";
+	      return false;
+	    }
+		
+		if ((panNumber.length != 10)) {
+			document.getElementById("error16").innerHTML = "Must be 10 Digits & like, SADOK6945H";
+			return false;
+		}
+		
+		if (!personalEmailId1 == null || personalEmailId1 != "") {     
+	           document.getElementById("error17").innerHTML = "";   
+	    } else {
+	       document.getElementById("error17").innerHTML = "Personal Email Id must be required";
+	      return false;
+	    }	
+		
+		if (personalEmailId1.indexOf('@') <= 0) {
+			document.getElementById("error17").innerHTML = "like, user@gmail.com";
+			return false;
+		} if ((personalEmailId1.charAt(personalEmailId1.length - 4) != '.') && (personalEmailId1.charAt(personalEmailId1.length - 3) != '.')) {
+			document.getElementById("error17").innerHTML = "like, user@gmail.com ";
+			return false;
+		}
+		return true;
+	}
+	
+	function validate3(){
+		var dateOfJoining = $('#dateOfJoining').val();
+		var employeeType = $('#employeeType').val();
+		var businessUnit = $('#businessUnit').val();
+		var reportingManager = $('#reportingManager').val();
+		var baseLocation = $('#baseLocation').val();
+		var currentLocation = $('#currentLocation').val();
+		
+		if (!dateOfJoining == null || dateOfJoining != "") {     
+	           document.getElementById("error18").innerHTML = "";   
+	    } else {
+	       document.getElementById("error18").innerHTML = "Joining Date must be required";
+	      return false;
+	    }
+		
+		if (!employeeType == null || employeeType != "") {     
+	           document.getElementById("error19").innerHTML = "";   
+	    } else {
+	       document.getElementById("error19").innerHTML = "Employee type  must be required";
+	      return false;
+	    }
+
+		if (!businessUnit == null || businessUnit != "") {     
+	           document.getElementById("error20").innerHTML = "";   
+	    } else {
+	       document.getElementById("error20").innerHTML = "Unit must be required";
+	      return false;
+	    }
+		
+		if (!reportingManager == null || reportingManager != "") {     
+	           document.getElementById("error21").innerHTML = "";   
+	    } else {
+	       document.getElementById("error21").innerHTML = "Reporting Manager must be required";
+	      return false;
+	    }
+		
+		if (!baseLocation == null || baseLocation != "") {     
+	           document.getElementById("error22").innerHTML = "";   
+	    } else {
+	       document.getElementById("error22").innerHTML = "Base Location must be required";
+	      return false;
+	    }
+		
+		if (!currentLocation == null || currentLocation != "") {     
+	           document.getElementById("error23").innerHTML = "";   
+	    } else {
+	       document.getElementById("error23").innerHTML = "Current Location must be required";
+	      return false;
+	    }
+		return true;
+	}
+
+	function validate4(){
+		var presentAddress = $('#presentAddress').val();
+		var permanentAddress = $('#permanentAddress').val();
+		var presentCity = $('#presentCity').val();
+		var permanentCity = $('#permanentCity').val();
+		var presentState = $('#presentState').val();
+		var permanentState = $('#permanentState').val();
+		var presentPinCode = $('#presentPinCode').val();
+		var permanentPinCode = $('#permanentPinCode').val();
+		var presentCountry = $('#presentCountry').val();
+		var permanentCountry = $('#permanentCountry').val();
+		
+		if (!presentAddress == null || presentAddress != "") {     
+	           document.getElementById("error24").innerHTML = "";   
+	    } else {
+			document.getElementById('error24').innerHTML = "Present Address must be required";
+	      return false;
+	    }
+		
+		if (!permanentAddress == null || permanentAddress != "") {     
+	           document.getElementById("error25").innerHTML = "";   
+	    } else {
+			document.getElementById('error25').innerHTML = "Permanent Address must be required";
+	      return false;
+	    }
+		
+		if (!presentCity == null || presentCity != "") {     
+	           document.getElementById("error26").innerHTML = "";   
+	    } else {
+			document.getElementById('error26').innerHTML = "Present City must be required";
+	      return false;
+	    }
+		
+		if (!permanentCity == null || permanentCity != "") {     
+	           document.getElementById("error27").innerHTML = "";   
+	    } else {
+			document.getElementById('error27').innerHTML = "Permanent City must be required";
+	      return false;
+	    }
+		
+		if (!presentState == null || presentState != "") {     
+	           document.getElementById("error28").innerHTML = "";   
+	    } else {
+			document.getElementById('error28').innerHTML = "Present State must be required";
+	      return false;
+	    }
+		
+		if (!permanentState == null || permanentState != "") {     
+	           document.getElementById("error29").innerHTML = "";   
+	    } else {
+			document.getElementById('error29').innerHTML = "Permanent State must be required";
+	      return false;
+	    }
+		
+		if (!presentPinCode == null || presentPinCode != "") {     
+	           document.getElementById("error30").innerHTML = "";   
+	    } else {
+			document.getElementById('error30').innerHTML = "Present PinCode must be required";
+	      return false;
+	    }
+
+		if (!permanentPinCode == null || permanentPinCode != "") {     
+	           document.getElementById("error31").innerHTML = "";   
+	    } else {
+			document.getElementById('error31').innerHTML = "Permanent PinCode must be required";
+	      return false;
+	    }
+		
+		if (!presentCountry == null || presentCountry != "") {     
+	           document.getElementById("error32").innerHTML = "";   
+	    } else {
+			document.getElementById('error32').innerHTML = "Present Country must be required";
+	      return false;
+	    }
+		
+		if (!permanentCountry == null || permanentCountry != "") {     
+	           document.getElementById("error33").innerHTML = "";   
+	    } else {
+			document.getElementById('error33').innerHTML = "Permanent Country must be required";
+	      return false;
+	    }
+
+		return true;
+	}
+	
+	function validate5(){
+		return true;
+	}
+	function validate6(){
+		return true;
+	}
+	function validate7(){
+		return true;
+	}
+	function validate8(){
+		return true;
+	}
+	function validate9(){
+		
+		var emergencyContactName = $('#emergencyContactName').val();
+		var emergencyContactTelNum = $('#emergencyContactTelNum').val();
+	 
+		if (!emergencyContactName == null || emergencyContactName != "") {     
+	           document.getElementById("error34").innerHTML = "";   
+	    } else {
+			document.getElementById('error34').innerHTML = "Emergency Contact Name must be required";
+	      return false;
+	    }
+		
+		if (!emergencyContactTelNum == null || emergencyContactTelNum != "") {     
+	           document.getElementById("error35").innerHTML = "";   
+	    } else {
+			document.getElementById('error35').innerHTML ="TelNum must be required";
+	      return false;
+	    }
+		if ((emergencyContactTelNum.length != 10)) {
+			document.getElementById("error35").innerHTML = "Must be 10 Digits";
+			return false;
+		}
+
+		return true;
+	}
+</script>
+
+
+<!-- 	<script>
+		/*View Payroll Slip*/
+		$('#viewPayrollSlip').click(function() {
+			var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+			
+					var month = $("#month").val();
+					var year = $("#ddlYears").val();
+					console.log('month ::: ' + month + ' - Year ::: ' + year)
+					$.ajax({
+						type : 'GET',
+						contentType : 'application/json',
+						url : contextPath + '/payrollSlip?month=' + month + '&'
+								+ 'year=' + year + '&view',
+						success : function(data) {
+							console.log('inside model =========	');
+							//$('#modalGrid').find('.modal-body').html(data);
+							/* let html = data;
+								$('#modalGrid').html(html); */
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script> -->
+
+
+	<!-- <script th:inline="javascript">
+	/*<![CDATA[*/
+	
+	    var dojList =  [[${dateOfJoining}]];
+	    console.log('DoJList ::::: ' + dojList);
+	    var mainDiv = document.getElementById("dateOfJoining");
+	    for (i = 0; i < dojList.length; i++) {
+	    	var doj = document.createTextNode(dojList[i]);
+	    	console.log(doj);
+	    	var p = document.createElement("p");
+	    	
+	    	p.appendChild(doj);
+	    	mainDiv.appendChild(p);
+	    }
+	/*]]>*/
+	</script> -->
+	
+<!--LIST OF YEARS-->
+<script>
+	 let dateDropdown = document.getElementById('year');
+
+    let currentYear = new Date().getFullYear();
+    let earliestYear = 1970;
+
+    while (currentYear >= earliestYear) {
+      let dateOption = document.createElement('option');
+      dateOption.text = currentYear;
+      dateOption.value = currentYear;
+      dateDropdown.add(dateOption);
+      currentYear -= 1;
+    }
+</script>
+
+<script>
+function toggleShow () {
+	  var el = document.getElementById("box");
+	  el.classList.toggle("show");
+	}
+</script>
+
+
+<!-- List Of Sub-Category For Send Mail to Customer Contact -->
+<script>
+	var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+
+    function loadSubCategories() {
+        var categoryId = document.getElementById("categorySelect").value;
+		console.log('Category Select -- ', categoryId);
+        
+        // AJAX request
+        $.ajax({
+            url: contextPath +'/subcategories/' + categoryId,
+            type: 'GET',
+            success: function(response) {
+                $('#subCategoryContainer').html(response);
+            }
+        });
+    }
+</script>
+</body>
+</html>

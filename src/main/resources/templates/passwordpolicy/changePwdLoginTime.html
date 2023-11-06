@@ -1,0 +1,106 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital
+	Solution</title>
+<link rel="stylesheet" href="../../../css/fonts.css" th:href="@{/css/fonts.css}">
+<link rel="stylesheet" href="../../../css/materialdesignicons.min.css" th:href="@{/css/materialdesignicons.min.css}">
+<link rel="stylesheet" href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="../../../css/fer.css" th:href="@{/css/fer.css}">
+
+<script>
+
+/*Change Password validation*/
+function cngPwdValidateForm() {
+	console.log("Inside check validation");
+	var old_pswrd = document.getElementById("old_pswrd").value;
+	if (!old_pswrd == null || old_pswrd != "") {
+		document.getElementById("blankMsg3").innerHTML = "";
+	} else {
+		document.getElementById("blankMsg3").innerHTML = "Old password must be required ";
+		return false;
+	} 
+	
+	var pswrd_1 = document.getElementById("pswrd_1").value;
+	if (!pswrd_1 == null || pswrd_1 != "") {
+		document.getElementById("blankMsg1").innerHTML = "";
+	} else {
+		document.getElementById("blankMsg1").innerHTML = "New password must be required ";
+		return false;
+	}
+	
+	var pswrd_2 = document.getElementById("pswrd_2").value;
+	if (!pswrd_2 == null || pswrd_2 != "") {
+		document.getElementById("blankMsg2").innerHTML = "";
+	} else {
+		document.getElementById("blankMsg2").innerHTML = "Confirm new password must be required ";
+		return false;
+	}
+	
+	 var password = document.getElementById("pswrd_1").value;
+     var passwordRegex =/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W_])(?=.*\d.*\d.*)[a-zA-Z\d\W_]+$/;
+     
+     if (passwordRegex.test(password)) {
+    	 document.getElementById("blankMsg1").innerHTML = "";
+     } else {
+    	 document.getElementById("blankMsg1").innerHTML = "Invalid password. Please ensure it has at least 8 characters, contains at least one letter and one digit.";
+ 		return false;
+     }
+	
+}
+
+</script>
+</head>
+<form onsubmit="return cngPwdValidateForm()" th:action="@{/changePwdLoginTime}" method="POST" th:object="${userMst}" autocomplete="off">
+
+<div th:if="${param.error3}" class="alert alertred" th:text="#{global.message.invalid}"></div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<input type="hidden" th:field="*{loginId}" />
+										<div class="form-group row">
+											<label class="col-lg-1 col-form-label asterisk" th:text="#{global.changePwd.oldPwd}">Old Password</label>
+											<div class="col-lg-3">
+												<input type="password" class="form-control" placeholder="Enter old password here.." id="old_pswrd" th:field="*{password}"> 
+												<span class="red" id="blankMsg3"></span>
+											</div>     
+											<label class="col-lg-1 col-form-label asterisk" th:text="#{global.changePwd.newPwd}">New Password</label>
+											<div class="col-lg-3">
+												<input type="password" class="form-control" placeholder="Enter new password here.." onkeyup="active()" id="pswrd_1" th:field="*{newPassword}"> 
+												<span class="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></span>	
+												<span class="red" id="blankMsg1"> </span>	                  										
+											</div>
+											<label class="col-lg-1 col-form-label asterisk" th:text="#{global.changePwd.confirmNewPwd}">Confirm New Password</label>
+											<div class="col-lg-3">
+												<input type="password" class="form-control" placeholder="Enter confirm new password here.." id="pswrd_2"  th:field="*{confirmPassword}"> 
+												<span class="red" id="blankMsg2"> </span>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+								<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a href="" class="btn btn-outline-secondary"><em class="fa fa-chevron-left"></em>
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" onclick="myFunction()" th:text="#{global.changePwd.update}">Update</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+</html>

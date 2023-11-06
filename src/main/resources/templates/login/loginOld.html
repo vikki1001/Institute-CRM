@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+<link rel = "icon" type = "image/png" th:href="@{/images/faviconhw.png}" href="../../../images/faviconhw.png">
+<link rel="stylesheet" href="../../../css/login.css" th:href="@{/css/login.css}">
+  
+<script type="text/javascript">
+/*Login Validation*/
+function loginValidateForm() {
+  var loginId = document.getElementById("loginId").value;
+  var password = document.getElementById("password").value;
+//  var captcha = document.getElementById("captcha").value;
+     
+    if (!loginId == null || loginId != "") {     
+           document.getElementById("blankMsg2").innerHTML = "";   
+    } else {
+       document.getElementById("blankMsg2").innerHTML = "Login ID must be required";
+      return false;
+    }
+    
+    if (!password == null || password != "") {     
+           document.getElementById("blankMsg3").innerHTML = "";   
+    } else {
+       document.getElementById("blankMsg3").innerHTML = "Password must be required";
+      return false;
+    }  
+    
+     <!-- if (!captcha == null || captcha != "") {     
+        document.getElementById("blankMsg4").innerHTML = "";   
+	 } else {
+	    document.getElementById("blankMsg4").innerHTML = "Captcha must be required";
+	   return false;
+	 }-->
+}
+</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="login">
+        <form class="sign-in-form" th:action="@{/loginSuccess}" method="POST" th:object="${userMst}" 
+        				onsubmit="return loginValidateForm()" autocomplete="off">
+          <img src="./images/hwforces.png" th:src="@{/images/hwforces.png}" alt="logo" class="logo">
+          
+         	<!-- <div class="alert alert-success" role="alert" id="alertMessage" th:text="${password}" th:if="${password}"></div> -->
+         	<div th:if="${param.error}" class="alert alertred" >[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</div>
+         	<div th:if="${param.otp}" class="alert alertred" th:text="#{global.message.otp}"></div>
+         	<div th:if="${param.failedAttempt}" class="alert alertred" th:text="#{global.message.failedAttempt}"></div>
+         	<div th:if="${param.error3}" class="alert alertred" th:text="#{global.message.invalid}"></div>
+         	<div th:if="${param.error4}" class="alert alertred" th:text="#{global.message.captcha}"></div>
+         	<div th:if="${param.error5}" class="alert alertred" th:text="#{global.message.password}"></div>
+         	<div th:if="${param.error6}" class="alert alertred" th:text="#{global.message.username}"></div>
+         	<div th:if="${param.error7}" class="alert alertred" th:text="#{global.message.password&captcha}"></div>
+			<div th:if="${param.logout}" class="alert alert-warning" th:text="#{global.message.logout}"> </div>
+			<div th:if="${param.inActive}" class="alert alertred" th:text="#{global.message.inActive}"> </div>
+
+					<div class="input-field">
+						<i class="fa fa-user"></i> <input type="text"
+							placeholder="Username" th:field="*{loginId}"
+							style="text-transform: uppercase;" />
+					</div>
+					<span class="red" id="blankMsg2"></span> 
+          
+          <div class="input-field">
+            <i class="fa fa-lock"></i>
+            <input type="password" th:field="*{password}"  th:placeholder="${param.otp != null ? 'Your One Time Password' : 'Password'}"/>            
+          </div>            
+          <span class="red" id="blankMsg3"></span>
+          
+     <!--  <span th:if="${param.otp == null}">
+||||||| .r4
+       <span th:if="${param.otp == null}">
+=======
+      <!-- <span th:if="${param.otp == null}">
+>>>>>>> .r7
+	  		<div>
+	    		<img th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}"/>
+	      	</div>    
+	      	<div class="input-field">
+	          	<i class="fa fa-refresh"></i>
+	          	<input type="hidden" th:field="*{hiddenCaptcha}" name="hiddenCaptcha"/>
+	          	<input type="text" placeholder="Captcha" th:field="${userMst.captcha}" name="captcha">     
+	      	</div>            
+	      	<span class="red" id="blankMsg4"></span>
+<<<<<<< .mine
+       </span> -->
+                  
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <button type="submit" class="btn btn-block login-btn" th:text="#{global.lbl.login}">LOGIN</button>
+          <a th:href="@{/forgot}" class="forgot-password-link" th:text="#{global.lbl.forgetPass}">Forgot your password ?</a>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">     
+          <div class="lngg">
+             <select id="locales" class="form-control rounded-pill form-control-lg-sm">
+                <option value="" disabled selected th:text="#{global.lbl.language}">LANGUAGE</option>
+                <option value="en" th:text="#{global.lang.en}">English</option>
+				<option value="hi" th:text="#{global.lang.hi}">Hindi</option>
+             </select>
+         </div>      
+        <img src="../../images/hrms.png" th:src="@{/images/hrms.png}" alt="" class="image" />
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <div class="copyright">
+      <p> All Rights Reserved. © 2021 Design & Developed By <a th:href="@{https://ksvsofttech.com/}" target="_blank">KSVSoftTech</a></p>
+    </div>
+  </div> 
+  
+	<script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+	<script src="../../../js/font.js" th:src="@{/js/font.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#locales").change(function() {
+				var selectedOption = $('#locales').val();
+				if (selectedOption != '') {
+					window.location.replace('/ksvsofttech/login?lang=' + selectedOption);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

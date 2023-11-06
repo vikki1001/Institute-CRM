@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+			<div class="col-sm-8">
+					<h4 class="cards-title" th:text="#{global.leaveTracker.title}">Pending Leave for approval</h4>
+					</div>
+					<div class="col-lg-4">
+					</div>		
+			
+			
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div> -->
+			
+			 <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.leaveTracker.title}">Pending Leave for approval</h4>
+          </div>
+        </div>
+      </div>
+
+				<div class="col-sm-12">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display"  style="width:100%">
+									<thead>
+									<tr>
+										<th th:text=#{global.leave.empId}>Employee Id</th>
+										<th th:text=#{global.leave.leaveType}>Leave Type</th>
+										<th th:text=#{global.leave.fromDate}>From Date</th>
+										<th th:text=#{global.leave.toDate}>To Date</th>
+										<th th:text=#{global.leave.days}>No of Days</th>
+										<th th:text=#{global.leave.leaveDetail}>Leave Details</th>
+										<th th:text=#{global.leave.managerId}>Manager Id</th>										
+										<th th:text=#{global.leave.status}>Status</th>
+										<th th:text=#{global.leave.action}>Action</th>
+									</tr>
+								</thead>
+									<tbody>
+										<tr th:each="leave : ${leaveList}">
+											<td th:text="${leave.empId.empId}"></td>
+											<td th:text="${leave.leaveType}"></td>
+											<td th:text="${leave.fromDate}"/></td>
+											<td th:text="${leave.toDate}"/></td>
+											<td th:text="${leave.dayLeave}"/></td>
+											<td th:text="${leave.leaveDetails}"></td>	
+											<td th:text="${leave.managerId}"/></td>										
+											<td><span class="badge badge-success" th:text="${leave.status}"></span></td>		
+											<td>
+											<a th:href="@{'/acceptLeave/' + ${leave.id}}" class="btn update" th:if="${leave.flag} != 'Y'"><em class="fa-solid fa-check"></em></a> 
+				                            <a th:href="@{'/rejectLeave/' + ${leave.id}}" class="btn update" th:if="${leave.flag} != 'Y'"><em class="fa-solid fa-xmark"></em></a>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

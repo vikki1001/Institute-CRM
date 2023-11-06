@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.assets.assetsheading}">Assets Management</h4>
+					</div>
+				</div>
+			</div>
+
+			<form onsubmit="return excelFormValidate()" th:action="@{saveAssetsExcel}" method="POST"
+				th:object="${assetsExcel}" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.assets.assetsData}"> Assets Data (Excel File Only)
+											</label>
+											<div class="col-lg-4">
+												<input type="file" name="file" class="form-control"
+													placeholder="Excel File Only" id="excelFile">
+												<span class="red" id="blankMsg"> </span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.assets.format}"> Download Excel Format </label>
+											<div class="col-lg-4">
+												<a th:href="@{/downloadAssets}">
+													<input type="button" class="btn btn-mshsd"
+														value="Click here to download" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="footer">
+					<div class="pd-2">
+						<div class="row">
+							<div class="col-sm-6">
+								<a th:href="@{/activeAssetsList}" class="btn btn-outline-secondary">
+									<em class="fa fa-chevron-left"></em>
+								</a>
+							</div>
+							<div class="col-sm-6">
+								<!-- <button type="button" class="btn btn-primary2 float-right" id="next1"
+									th:text="#{global.empReg.next}">Next</button> -->
+									<button class="btn btn-primary2 float-right"
+									th:text="#{global.assets.save}">save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

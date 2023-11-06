@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+<link href="../../../css/error.css" rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body>
+	<div id="notfound">
+		<div class="notfound">
+		 <img src="./images/ksv.png" th:src="@{/images/ksv.png}" alt="logo" class="logo" style="width:200px;">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+				<h2>404 - The Page can't be found</h2>			
+			</div>
+
+			<a href="#" onclick="history.back()">Back to Previous Page</a> <br>
+			<a href="#" onClick="window.location.reload();">Reload Page</a>  <br>
+			<a th:href="@{/dashboard}">Home Page</a>
+            <div class="notfound-404">			
+				<h2>Please Contact Our Team ksvsofttech</h2>	
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+
+const reloadtButton = document.querySelector("#reload");
+//Reload everything:
+function reload() {
+ reload = location.reload();
+}
+//Event listeners for reload
+reloadButton.addEventListener("click", reload, false);
+
+</script>
+</html>

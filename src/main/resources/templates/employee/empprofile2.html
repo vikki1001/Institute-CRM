@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row" th:each="basic : ${empProfile}">
+				<div class="col-md-6">
+					<div class="card overflow-hidden">
+						<div class="bg-primary_ bg-soft">
+							<div class="row">
+								<div class="col-7">
+									<div class="text-primary p-4">
+										<h5 class="text-primary">Welcome Back !</h5>
+										<p th:text="${basic.empId}">ID-KSVEP101</p>
+									</div>
+								</div>
+								<div class="col-5 align-self-end_">
+									<img src="./images/profile/profile-img.png" th:src="@{/images/profile/profile-img.png}" alt="" class="img-fluid">
+								</div>
+							</div>
+						</div>
+						<div class="card-body pt-0">
+							<div class="row">
+									<div class="col-sm-4">
+										<div class="avatar-md_ profile-user-wid">
+											<span th:if="${basic.file} == null">
+												<img class="img-thumbnail rounded-circle"
+													src="./images/profile/profile.png"
+													th:src="@{/images/profile/profile.png}" alt="">
+											</span>
+											<span th:if="${basic.file} != null">
+												<img class="img-thumbnail rounded-circle"
+													th:src="@{${'/image?empId='+ basic.empId}}" alt="">
+											</span>
+										</div>
+										<h5 class="font-size-15_" th:text="${basic.fullName}">Cynthia Price
+										</h5>
+										<p class="font-size-15__ mb-0"
+											th:text="${basic.empWorkDetails.designation}">UI/UX Designer</p>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.basicDetails}">Basic Details</h6>
+						</div>
+						<div class="card-body">
+							<ul class="mb-0">
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.empId}">Employee ID</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.empId}">AD002d</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.compEmailId}">Company Email ID</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.coEmailId}">abcexample@gmail.com</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.firstName}">First Name</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.firstName}">-</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.middleName}">Middle Name </span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.middleName}">--</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.lastName}">Last Name</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.lastName}">--</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.fullName}">Full Name</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.fullName}">--</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.gender}">Gender</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.gender}">Male</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.grade}">Grade</span></div>
+									<div class="col-6"><span class="text-mutedd" th:text="${basic.grade}">A</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.personalDetails}">Personal Details</h6>
+						</div>
+						<div class="card-body">
+							<ul class="mb-0">
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.birthDate}">Birth Date</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${#dates.format(basic.empPersonalDetails.birthDate, 'dd-MM-yyyy')}">--</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.placeOfBirth}">Place Of Birth </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.placeOfBirth}">abcexample@gmail.com</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.age}">Age</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.age}">-</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.bloodGroup}">Blood Group</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.bloodGroup}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.contactNo}">Contact No.</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.contactNo}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.alterContactNo}">Alternative Contact No.
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.alternateContactNo}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.alterContactNo}">Marital Status</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.maritalStatus}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.aadhaarNo}">Aadhaar Number</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.addharNumber}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold" th:text="#{global.empProfile.panNo}">PAN
+											Number
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.panNumber}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.personalMailId1}">Personal Email ID-1</span>
+									</div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.personalEmailId1}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.personalMailId2}">Personal Email ID-2</span>
+									</div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.personalEmailId2}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.religion}">Religion</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empPersonalDetails.religion}"> --</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.workDetails}">Work Details</h6>
+						</div>
+						<div class="card-body">
+							<ul class="mb-0">
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.dateOfJoin}">Date of joining
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.dateOfJoining}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.empType}">Employee type </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.employeeType}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.businessUnit}">Business Unit
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.businessUnit}">-</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.projectId}">Project ID</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.projectId}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold" th:text="#{global.empProfile.kraRole}">KRA
+											Role</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.kraRole}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.projectName}">Project Name
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.projectName}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.designation}">Designation </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.designation}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.reportingManager}">Reporting Manager
+
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.reportingManager}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.baseLocation}">Base Location
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.baseLocation}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.currentLocation}">Current Location</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empWorkDetails.currentLocation}">--</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.addressDetails}">Address Details</h6>
+						</div>
+						<div class="card-body">
+							<ul class="mb-0">
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.presentAdd}">Present Address
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.presentAddress}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.parmanentAdd}">Permanent Address </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.permanentAddress}">abcexample@gmail.com</span>
+									</div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.presentCity}">Present City
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.presentCity}">-</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.parmanentCity}">Permanent City</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.permanentCity}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.presentState}">Present State</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.presentState}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.parmanentState}">Permanent State
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.permanentState}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.presentPinCode}">Present PinCode </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.presentPinCode}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.parmanentPinCode}">Permanent PinCode
+
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.permanentPinCode}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.presentCountry}">Present Country
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.presentCountry}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.parmanentCountry}">Permanent Country</span>
+									</div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empAddressDetails.permanentCountry}">--</span></div>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+					<div class="cardoverflow" style="height:auto">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.salaryDetails}">Salary Details</h6>
+						</div>
+						<div class="card-body">
+							<ul class="mb-0">
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.salaryA/CBank}">Salary A/C Bank
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empSalaryDetails.salaryAccBank}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.salaryA/CNo}">Salary A/c Number </span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empSalaryDetails.salaryAccNo}">--</span></div>
+								</li>
+								<li class="row flex-wrap mb-3">
+									<div class="col-6"><span class="fw-bold"
+											th:text="#{global.empProfile.accIFSCode}">Account IFS Code
+										</span></div>
+									<div class="col-6"><span class="text-mutedd"
+											th:text="${basic.empSalaryDetails.accIFSCode}">--</span></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-6 col-xl-12 col-lg-12 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.passportDetails}">Passport Details</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table student-data-table m-t-20" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.empProfile.passportNo}">Passport-Number</th>
+											<th th:text="#{global.empProfile.nameInPassport}">Name In Passport</th>
+											<th th:text="#{global.empProfile.passportAdd}">Passport Address</th>
+											<th th:text="#{global.empProfile.passportCountry}">Passport Country</th>
+											<th th:text="#{global.empProfile.passportIssueDate}">Passport Date Of Issue
+												Date</th>
+											<th th:text="#{global.empProfile.passportExpireDate}">Passport Date Of
+												Expire Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td th:text="${basic.empPassportDetails.passportNo}"></td>
+											<td th:text="${basic.empPassportDetails.passportName}"></td>
+											<td th:text="${basic.empPassportDetails.passportAddress}"></td>
+											<td th:text="${basic.empPassportDetails.passportCountry}"></td>
+											<td th:text="${basic.empPassportDetails.passportDateOfIssue}"></td>
+											<td th:text="${basic.empPassportDetails.passportDateOfExpire}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-xxl-6 col-xl-12 col-lg-12 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.skills}">Skills Details</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table student-data-table m-t-20" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.empProfile.skillName}">Skill/Function Name</th>
+											<th th:text="#{global.empProfile.versionName}">Version [if applicable]</th>
+											<th th:text="#{global.empProfile.profLevel}">Proficiency Level</th>
+											<th th:text="#{global.empProfile.ExperSill}">Experience in the Skill [in
+												years]</th>
+											<th th:text="#{global.empProfile.selfRating}">Self-Rating</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td th:text="${basic.empSkillDetails.skill}"></td>
+											<td th:text="${basic.empSkillDetails.skillVersion}"></td>
+											<td th:text="${basic.empSkillDetails.proficiencyLevel}"></td>
+											<td th:text="${basic.empSkillDetails.experienceSkill}"></td>
+											<td th:text="${basic.empSkillDetails.selfRating}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xxl-6 col-xl-12 col-lg-12 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.certificationDetails}">Certification
+								Details</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table student-data-table m-t-20" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.empProfile.certiName}">Certification Name/Title</th>
+											<th th:text="#{global.empProfile.certiVersion}">Version [if applicable]
+											</th>
+											<th th:text="#{global.empProfile.certiDate}">Date/Year of Completion</th>
+											<th th:text="#{global.empProfile.certiValidTill}">Valid Till</th>
+											<th th:text="#{global.empProfile.certiScore}">Score/Grade/GPA</th>
+											<th th:text="#{global.empProfile.certiCode}">Code/Roll No.</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td th:text="${basic.empCertificationDetails.certificationName}"></td>
+											<td th:text="${basic.empCertificationDetails.certVersion}"></td>
+											<td th:text="${basic.empCertificationDetails.certCompleteDate}"></td>
+											<td th:text="${basic.empCertificationDetails.certValidTill}"></td>
+											<td th:text="${basic.empCertificationDetails.certScore}"></td>
+											<td th:text="${basic.empCertificationDetails.certCode}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-6 col-xl-12 col-lg-12 col-md-12">
+					<div class="cardoverflow">
+						<div class="card-header py-3 d-flex justify-content-between">
+							<h6 class="mb-0 fw-bolds" th:text="#{global.empMgmt.emergencyContactDetails}">Emergency
+								Contact Details</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table student-data-table m-t-20" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.empProfile.emergContName1}">Emergency Contact
+												Name(Offshore)</th>
+											<th th:text="#{global.empProfile.emergContTelNo1}">Emergency Contact
+												TelNo.(Offshore)</th>
+											<th th:text="#{global.empProfile.emergContName2}">Emergency Contact
+												Name(Onsite)</th>
+											<th th:text="#{global.empProfile.emergContTelNo2}">Emergency Contact
+												TelNo.(Onsite)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td th:text="${basic.empEmergContactDetails.emergContactName1}"></td>
+											<td th:text="${basic.empEmergContactDetails.emergContactNo1}"></td>
+											<td th:text="${basic.empEmergContactDetails.emergContactName2}"></td>
+											<td th:text="${basic.empEmergContactDetails.emergContactNo2}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

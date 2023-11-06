@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+			<div class="col-sm-4">
+				<h4 class="cards-title"  th:text="#{global.oec.heading}"> </h4>		
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+				    <hr>
+				</div>
+			</div>
+		   </div> -->
+		   <div class="row">	
+			<div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.oec.heading}"> </h4>	
+          </div>
+        </div>		
+		</div>	
+			<form onsubmit="return OECValidate()" th:action="@{/updateOEC}" method="POST" th:object="${oec}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									<input type="hidden" th:field="*{orgEmpContactID}">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.firstName}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter first name here.." id="firstName" th:field="*{firstName}"> 
+												<span class="red" id="blankMsg"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.lastName}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter last name here.." id="lastName" th:field="*{lastName}"> 
+												<span class="red" id="blankMsg1"></span>
+											</div>
+										</div>
+									
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.title}"></label>
+											<div class="col-lg-4">
+												<select class="form-control" id="title" th:field="*{title}">
+													<option value="" selected  th:text="#{global.oec.select}">Select..</option>
+													<option value="Mr." th:text="#{global.oec.mr}"> Mr.</option>
+													<option value="Mrs." th:text="#{global.oec.mrs}"> Mrs.</option>
+													<option value="Ms." th:text="#{global.oec.ms}"> Ms.</option>
+													<option value="Miss." th:text="#{global.oec.miss}"> Miss.</option>
+												</select>
+												<span class="red" id="blankMsg2"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.organization}"></label>
+											<div class="col-lg-4">
+												<select class="form-control" id="organization" th:field="*{organization}">
+													<option value="" selected  th:text="#{global.oec.select}">Select..</option>
+													<option th:each="orgContact : ${organizationContact}" th:value="${orgContact.organizationId}" th:text="${orgContact.organizationName} " />
+												</select>   
+												<span class="red" id="blankMsg3"></span>
+											</div>
+										</div>
+
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.email}"></label>
+											<div class="col-lg-4">
+												<input class="form-control input-field" type="text" placeholder="e.g. example@gmail.com" name="email" id="emailId" th:field="*{emailId}">
+												<span class="red" id="blankMsg4"></span>
+											</div>
+											<label class="col-lg-2 col-form-label  asterisk" th:text="#{global.oec.mobile}"></label>
+											<div class="col-lg-4">
+												<input class="form-control input-field" type="tel" placeholder="Enter phone number.." id="mobileNumber" th:field="*{mobileNumber}" maxlength="10"> 
+												<span class="red" id="blankMsg5"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.oec.address}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter address here.." id="address" th:field="*{address}"> 
+												<span class="red" id="blankMsg6"></span>
+											</div>
+											<label class="col-lg-2 col-form-label" th:text="#{global.oec.linkedinURL}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter linkedin URL here.." id="linkedinURL" th:field="*{linkedinURL}"> 
+												<span class="red" id="blankMsg7"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label" th:text="#{global.oec.twitterURL}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter twitter URL here.." id="twitterURL" th:field="*{twitterURL}"> 
+												<span class="red" id="blankMsg8"></span>
+											</div>
+											<label class="col-lg-2 col-form-label" th:text="#{global.oec.facebookURL}"></label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter facebook URL here.." id="facebookURL" th:field="*{facebookURL}"> 
+												<span class="red" id="blankMsg9"></span>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+		<a th:href="@{/activeOECList}" class="btn btn-outline-secondary">
+							<em class="fa-solid fa-arrow-left"></em>
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" th:text="#{global.oec.save}"></button>
+		</div>
+	</div>
+</div>
+</div>		
+			</form>
+		</div>
+	</div>
+</body>
+</html>

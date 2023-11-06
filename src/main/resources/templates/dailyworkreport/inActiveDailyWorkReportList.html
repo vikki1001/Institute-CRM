@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+			<div class="col-lg-4">
+					<h4 class="cards-title" th:text="#{global.dailyWorkReport.dailyWorkReport}"> Daily Work Report</h4>
+					</div>
+					<div class=" col-sm-4 text-center">		
+				
+                        <a th:href="@{/activeWorkReport}">
+                            <button class="btn btn-secondary" th:text="#{global.dailyWorkReport.active}" style="margin-right:8px">Active</button></a>
+                        <a th:href="@{/inActiveWorkReport}">
+                        	<button class="btn btn-secondary active" th:text="#{global.dailyWorkReport.cancel}">cancel</button></a>
+               </div>
+					<div class="col-lg-4">
+						<a th:href="@{/dailyWorkReport}" class="btn add-btn pull-right plus" th:text="#{global.dailyWorkReport.addNew}" >Add New</a>
+					</div>		
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div> -->
+				<div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.dailyWorkReport.dailyWorkReport}"> Daily Work Report</h4>                             
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                   <a th:href="@{/activeWorkReport}">                     
+                                   <button class="btn btn-secondary "></button></a>
+                                  <a th:href="@{/inActiveWorkReport}">
+                        	       <button class="btn btn-secondary active"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                   <a th:href="@{/dailyWorkReport}" class="btn add-btn plus" th:text="#{global.dailyWorkReport.addNew}" >Add New</a>
+                                </div>
+                            </div>
+                        </div>
+						
+				
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.dailyWorkReport.fullName}">Full NAME</th>
+											<th th:text="#{global.dailyWorkReport.date}">DATE</th>
+											<th th:text="#{global.dailyWorkReport.officeInTime}">Office In Time</th>
+										    <th th:text="#{global.dailyWorkReport.officeOutTime}">Office Out Time</th>
+										    <th th:text="#{global.dailyWorkReport.projectName}">Project Name</th>
+										    <th th:text="#{global.dailyWorkReport.module}">Module</th>
+										    <th th:text="#{global.dailyWorkReport.description}">Description</th>
+										    <th th:text="#{global.dailyWorkReport.status}">Status</th>
+										    <th th:text="#{global.dailyWorkReport.analysis}">Analysis</th>
+										    
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="dailyWorkReport : ${workReportList}">
+											<td th:text="${dailyWorkReport.fullName}"></td>
+											<td th:text="${dailyWorkReport.date}"></td>
+											<td th:text="${dailyWorkReport.officeInTime}"></td>
+											<td th:text="${dailyWorkReport.officeOutTime}"></td>
+											<td th:text="${dailyWorkReport.projectName}"></td>
+											<td th:text="${dailyWorkReport.module}"></td>
+											<td th:text="${dailyWorkReport.description}"></td>
+											<td th:text="${dailyWorkReport.status}"></td>
+											<td th:text="${dailyWorkReport.analysis}"></td>
+											
+				                        </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

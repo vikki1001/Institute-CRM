@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+               <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.training.title}">Training</h4>                              
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                   <a th:href="@{/activeTrainingList}">                            
+                                   <button class="btn btn-secondary"></button></a>
+                                    <a th:href="@{/inActiveTrainingList}">
+                        	       <button class="btn btn-secondary active"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                   <a th:href="@{/trainingForm}" class="btn add-btn plus" th:text="#{global.training.addNew}" >Add New</a>
+                                </div>
+                            </div>
+                        </div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.training.Subject}">Subject</th>
+											<th th:text="#{global.training.trainingPurpose}">Training Purpose</th>
+											<th th:text="#{global.training.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="training : ${trainingList}">
+											<td th:text="${training.subject}"></td>
+											<td th:text="${training.trainingPurpose}"></td>
+											<td> 
+				                           <a th:href="@{'/activetraining/' + ${training.id}}" class="btn update"><em class="fa-solid fa-check"></em> </a>											
+				                           </td>  
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

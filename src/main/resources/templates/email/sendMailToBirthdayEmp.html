@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+  
+</head>
+<body>
+    <h4>KSV - SoftTech Digital Solution</h4>
+   
+    <div>
+    <span th:each="userList : ${userList}">
+    <p>Dear <span th:text="${userList.fullName}" ></span>,<br></p>
+   
+   <p>
+   We value your special day just as much as we value you. On your birthday, we send you our warmest and most heartfelt wishes.
+
+We are thrilled to be able to share this great day with you, and glad to have you as a valuable member of the team. We appreciate everything you have done to help us flourish and grow.
+
+Our entire corporate family at KSV Soft-Tech wishes you a very happy birthday and wishes you the best on your special day!
+   
+   </p>
+   <!-- <span th:text="${userList.description}"></span> -->
+   
+   <p> Thanks & Regards,<br>
+	   Admin Team.<br>
+	   KSV Soft-Tech
+   </p>
+    </span>
+   
+    
+    </div>
+    
+</body>
+</html> 

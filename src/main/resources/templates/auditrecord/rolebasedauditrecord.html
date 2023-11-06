@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+		<form th:action="@{/between/fromortoorroleCode}" method="GET" th:object="${auditRecord}"
+							onsubmit="return roleValidateForm()" autocomplete="off">
+			<div class="row">            
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.audit.roleAudit}">Role Audit</h4>
+						<!-- JavaScript DataTable export to PDF with custom name & formatting -->
+						<input type="hidden" id="dtTitle" th:value="#{global.audit.auditlistingreport}">
+						<div class="page-title-right">
+							<!-- <div class="btn-group float-right">
+								<button type="reset" class="btn-tab" style="margin-right:40px"><img src="../../../images/profile/reset.png" th:src="@{/images/profile/reset.png}" style="margin-right:10px" width="18px"  alt="" th:text="#{global.button.reset}"> Reset</button>																											
+							    <button type="submit" class="btn-tab" onclick="myFunction()"><img src="../../../images/profile/report.png" th:src="@{/images/profile/report.png}" style="margin-right:10px" width="24px"  alt="" th:text="#{global.botton.generateReport}"> Generate Report</button>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="card" style="margin-bottom: 0px; padding-top:30px;">
+						
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="form-group row">
+										<label class="col-sm-1 col-form-label asterisk"
+											th:text="#{global.audit.fromdate3}">From Date</label>
+
+										<div class="col-sm-2">
+											<input class="form-control" type="date" name="from" id="date" />
+											<span class="red" id="blankMsg"> </span>
+										</div>
+
+										<label class="col-sm-1 col-form-label asterisk"
+											th:text="#{global.audit.todate3}">To
+											Date</label>
+										<div class="col-sm-2">
+											<input class="form-control" type="date" name="to" id="date1" />
+											<span class="red" id="blankMsgs"> </span>
+										</div>
+
+										<label class="col-sm-1 col-form-label asterisk"
+											th:text="#{global.audit.roleCode}">Rolecode</label>
+										<div class="col-sm-2">
+											<select class="form-control" name="roleCode" id="role">
+												<option value="" selected th:text="#{global.user.select}"> Select..
+												</option>
+												<option th:each="role : ${listRole}" th:value="${role.roleCode}"
+													th:text="${role.RoleCode} " />
+											</select>
+											<span class="red" id="roleMsg"> </span>
+										</div>
+										<div class="col-sm-3">
+										<div class="btn-group float-right">
+											<button type="reset" class="btn-tab" style="margin-right:40px"><img
+													src="../../../images/profile/reset.png"
+													th:src="@{/images/profile/reset.png}" style="margin-right:10px"
+													width="18px" alt="" th:text="#{global.button.reset}"> Reset</button>
+
+											<button type="submit" class="btn-tab" onclick="myFunction()"><img
+													src="../../../images/profile/report.png"
+													th:src="@{/images/profile/report.png}" style="margin-right:10px"
+													width="24px" alt=""> Generate</button>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>						
+					</div>
+				</div>
+
+				<div class="col-sm-12 top">
+					<div class="card">
+						<div class="table-responsive">
+							<table id="datatable-buttons" class="display" style="width:100%">
+								<thead>
+									<tr>
+										<th th:text="#{global.audit.createdDate}">Log Date</th>
+										<th th:text="#{global.audit.modulename}">Module Name</th>
+										<th th:text="#{global.audit.menuCode}">Menu Name</th>
+										<th th:text="#{global.audit.activityCode}">Activity</th>
+										<th th:text="#{global.audit.remarks}">Remark</th>
+										<th th:text="#{global.audit.loginId}">Username</th>
+										<th th:text="#{global.audit.role}">Role</th>
+										<th th:text="#{global.audit.branchCode}">Branch Code</th>
+										<th th:text="#{global.audit.ipAdr}">IP Address</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="auditrecord : ${listAuditRecord}">
+										<td th:text="${#dates.format(auditrecord.createdDate, 'dd-MM-yyyy HH:mm a')}">
+										</td>
+										<td th:text="${auditrecord.subSectionCode}"></td>
+										<td th:text="${auditrecord.menuCode}"></td>
+										<td th:text="${auditrecord.activityCode}"></td>
+										<td th:text="${auditrecord.remarks}"></td>
+										<td th:text="${auditrecord.loginId}"></td>
+										<td th:text="${auditrecord.roleCode}"></td>
+										<td th:text="${auditrecord.branchCode}"></td>
+										<td th:text="${auditrecord.ipAddr}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div id="outsideButton"></div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

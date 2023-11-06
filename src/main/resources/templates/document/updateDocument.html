@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+			    <div class="col-sm-12">
+				<h4 class="cards-title" th:text="#{global.docMgmt.title}">Document Managenent</h4>
+				</div>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div> -->
+				
+				  <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.docMgmt.title}">Document Managenent</h4>
+          </div>
+        </div>
+      </div>
+			
+
+			<form onsubmit="return uploadDocValidateForm()" th:action="@{/updateDocument}" method="POST" th:object="${uploadDoc}" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-6">
+										<div class="form-group row">
+										<input type="hidden" th:field="*{id}">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.docMgmt.heading}"> Heading </label>
+											<div class="col-lg-9">
+												<input type="text" class="form-control" placeholder="Enter heading here" 
+																id="templateName" th:field="*{templateName}">
+												<span class="red" id="blankMsg"> </span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.docMgmt.description}"> Description </label>
+											<div class="col-lg-9">
+												<input type="file" name = "file" class="form-control" placeholder="Enter heading here" 
+																id="file" th:field="*{file}">
+												<span class="red" id="blankMsg1"> </span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.docMgmt.select}">Select</label>
+											<div class="col-lg-9">
+												<select class="form-control" id="fileDepartment" th:field="*{fileDepartment}">
+													<option value="" selected  th:text="#{global.docMgmt.select}">Select..</option>
+													<option value="Employee" th:text="#{global.docMgmt.emp}"> Employee </option>
+													<option value="Organization" th:text="#{global.docMgmt.org}"> Organization </option>
+												</select> <span class="red" id="blankMsg2"> </span>
+											</div>
+										</div>									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				
+								<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a th:href="@{/activeDocList}" class="btn btn-outline-secondary"> <em class="fa fa-chevron-left"></em>
+							
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" th:text="#{global.docMgmt.add}">Add</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

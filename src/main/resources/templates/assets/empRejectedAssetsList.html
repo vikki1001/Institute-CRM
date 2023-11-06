@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+			<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.assets.RejectedAssetsList}">Assets Rejected List</h4>
+						<div class="page-title-right">
+							<a th:href="@{/employeeAssetsList}">
+								<button class="btn btn-secondary_" th:text="#{global.assets.pending}"
+									style="margin-right:8px">Pending</button>
+							</a>
+							<a th:href="@{/empApprovedAssetsList}">
+								<button class="btn btn-secondary_" th:text="#{global.assets.approved}"
+									style="margin-right:8px">Approved</button>
+							</a>
+							 <a th:href="@{/empRejectAssetsList}">
+								<button class="btn btn-secondary_ active" th:text="#{global.assets.rejected}">Rejected</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			<!-- <div class="col-lg-4">
+					<h4 class="cards-title" th:text="#{global.assets.RejectedAssetsList}">Assets Rejected List</h4>
+					</div>
+					<div class="col-lg-8 text-sm-end">
+					<a th:href="@{/employeeAssetsList}">
+					<button class="btn btn-secondary" th:text="#{global.assets.pending}" style="margin-right:8px">Pending</button>
+				</a> 
+				<a th:href="@{/empApprovedAssetsList}">
+					<button class="btn btn-secondary" th:text="#{global.assets.approved}" style="margin-right:8px">Approved</button>
+				</a>
+				<a th:href="@{/empRejectAssetsList}">
+					<button class="btn btn-secondary active" th:text="#{global.assets.rejected}" style="margin-right:8px">Rejected</button>
+				</a>
+					</div>					
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div> -->
+				
+	
+						
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.assets.empId}">Employee ID</th>
+											<th th:text="#{global.assets.empName}">Employee Name</th>
+											<th th:text="#{global.assets.assetsCode }"> Assets Code</th>
+											<th th:text="#{global.assets.assetsModel}">Assets model</th>
+											<th th:text="#{global.assets.assetsMake}">Assets make</th>
+											<th th:text="#{global.assets.assetsDescription}">Assets description</th>
+											<th th:text="#{global.assets.assetsServiceTag}">Assets service tag</th>
+											<th th:text="#{global.assets.status}">Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="assets : ${assetsList}">
+											<td th:text="${assets.empId}"></td>
+											<td th:text="${assets.empName}"></td>
+											<td th:text="${assets.assetsCode}"></td>
+											<td th:text="${assets.assetsModel}"></td>
+											<td th:text="${assets.assetsMake}"></td>
+											<td th:text="${assets.assetsDescription}"></td>
+											<td th:text="${assets.assetsServiceTag}"></td>
+											<td><span class="badge badge-success" th:text="${assets.confirmationStatus}"></span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

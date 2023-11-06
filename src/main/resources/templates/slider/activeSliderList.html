@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">	
+		<div class="container-fluid">
+			<!-- <div class="row">
+			       <div class="col-lg-4">
+					<h4 class="cards-title" th:text="#{global.slider.title}">Sider</h4>
+					</div>
+					<div class=" col-sm-4 text-center">					
+                        <a th:href="@{/activeSliderList}">
+                            <button class="btn btn-secondary active" th:text="#{global.slider.active}" style="margin-right:8px">Active</button></a>
+                        <a th:href="@{/inActiveSliderList}">
+                        	<button class="btn btn-secondary" th:text="#{global.slider.inactive}">Inactive</button></a>
+                    </div>
+					<div class="col-lg-4">
+						<a th:href="@{/sliderHome}" class="btn add-btn pull-right plus" th:text="#{global.slider.addNew}">Add New</a>
+					</div>		
+					
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div> -->
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.slider.title}">Sider</h4>
+						<div class="page-title-right">
+							<label>Active</label>
+							<div class="togglebutton">
+								 <a th:href="@{/activeSliderList}">
+									<button class="btn btn-secondary active"></button></a>
+								 <a th:href="@{/inActiveSliderList}">
+									<button class="btn btn-secondary"></button></a>
+							</div>
+							<label>Inactive</label>
+						</div>
+						<div class="page-title-right">
+							<a th:href="@{/sliderHome}" class="btn add-btn plus" th:text="#{global.slider.addNew}">Add New</a>
+						</div>
+					</div>
+				</div>
+						
+				
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.slider.date}">Date</th>
+											<th th:text="#{global.slider.image}">Image</th>
+											<th th:text="#{global.slider.description}">Description</th>
+											<th th:text="#{global.slider.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="slide : ${sliderList}">
+											<td th:text="${slide.date}"></td>
+											<td>
+											<span th:if="${slide.image} != null"><img th:src="@{${'/sliderImage?id='+ slide.id}}" width="50px"  alt=""></span>
+											<span th:if="${slide.image} == null"><img src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}"  width="50px" alt=""></span></td>
+											<td th:text="${slide.imageDescription}"></td>
+
+											<td><a th:href="@{'/sliderUpdate/' + ${slide.id}}" class="btn update"><em
+													class="fa-solid fa-pen-to-square"></em></a> 
+				                            <a th:href="@{'/deactiveSlider/' + ${slide.id}}" class="btn update"> <em
+													class="fa-solid fa-xmark"></em> </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+</body>
+</html>

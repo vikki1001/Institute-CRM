@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+			<div class="col-sm-12">
+				<h4 class="cards-title" th:text="#{global.training.title}"> Trainig </h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div> -->
+			<div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0"  th:text="#{global.training.title}"> Training </h4>
+          </div>
+        </div>
+
+			<form onsubmit="return trainingFormValidate()" th:action="@{/saveTrainingForm}" method="POST" th:object="${trainingForm}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<input type="hidden" th:field="*{id}">
+										<div class="form-group row">										
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.trainig.subject}">Subject</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter subject here.." id="subject" th:field="*{subject}"> 
+												<span class="red" id="blankMsg"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.trainig.trainingPurpose}">Training Purpose</label>
+											<div class="col-lg-4">
+												<select class="form-control" id="trainingPurpose" th:field="*{trainingPurpose}">
+													<option value="" selected th:text="#{global.training.select}">Select..</option>
+													<option value="Training Increases Retention of Employees" > Training Increases Retention of Employees </option>
+													<option value="Team-Building Benefits Everyone" > Team-Building Benefits Everyone </option>
+													<option value="Increases in Productivity and Efficiency" > Increases in Productivity and Efficiency </option>
+													<option value="Remain on the Cutting Edge of Industry Change" > Remain on the Cutting Edge of Industry Change </option>
+													<option value="New Product for this Technology" > New Product for this Technology </option>
+												</select> 
+												<span class="red" id="blankMsg1"></span>
+											</div>
+																		
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+								<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a th:href="@{/activeTrainingList}" class="btn btn-outline-secondary"><em class="fa fa-chevron-left"></em>
+							
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" th:text="#{global.training.save}">Save</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

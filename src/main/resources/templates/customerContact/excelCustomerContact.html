@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">	
+			<div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0" th:text="#{global.customerContact.heading}"> </h4>	
+          </div>
+        </div>		
+		</div>	
+
+			<form onsubmit="return excelFormValidate()" th:action="@{saveCustomerContactExcel}" method="POST" th:object="${customerContact}" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.customerContact.excelTitle}"></label>
+											<div class="col-lg-3">
+												<input type="file" name="file" class="form-control" placeholder="Excel File Only" id="excelFile">
+												<span class="red" id="blankMsg"> </span>
+											</div>
+											
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.customerContact.excelDownload}"></label>
+											<div class="col-lg-3">
+												<a th:href="@{/downloadCustomerContactExcel}">
+												<input type="button" class="btn btn-mshsd" value="Click here to download" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a th:href="@{/activeCustomerContactList}"
+								class="btn btn-outline-secondary"><em class="fa-solid fa-arrow-left"></em>
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right"
+								type="submit" th:text="#{global.customerContact.save}">Save</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

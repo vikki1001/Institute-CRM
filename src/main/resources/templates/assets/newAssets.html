@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.assets.assetsheading}">Assets Management</h4>
+					</div>
+				</div>
+			</div>
+			
+				<!-- <div class="col-sm-12">
+					<h4 class="cards-title" th:text="#{global.assets.Assets}"> Assets Managment </h4>
+				</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div> -->
+
+				<form th:action="@{saveAssets}" method="POST" th:object="${assets}" autocomplete="off">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-xl-12">
+
+											<div class="form-group row">
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.empId}">Employee Id</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter employee Id here.." th:field="*{empId}">
+													<span class="red" th:if="${#fields.hasErrors('empId')}"
+														th:errors="*{empId}"></span>
+												</div>
+
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.empName}">Employee Name</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter employee name here.." th:field="*{empName}">
+													<span class="red" th:if="${#fields.hasErrors('empName')}"
+														th:errors="*{empName}"></span>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsCode}">Assets Code</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter assets code here.." th:field="*{assetsCode}">
+													<span class="red" th:if="${#fields.hasErrors('assetsCode')}"
+														th:errors="*{assetsCode}"></span>
+												</div>
+
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsModel}">Assets model</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter assets model here.."
+														th:field="*{assetsModel}">
+													<span class="red" th:if="${#fields.hasErrors('assetsModel')}"
+														th:errors="*{assetsModel}"></span>
+												</div>
+											</div>
+
+
+
+											<div class="form-group row">
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsMake}">Assets make</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter assets make here.." th:field="*{assetsMake}">
+													<span class="red" th:if="${#fields.hasErrors('assetsMake')}"
+														th:errors="*{assetsMake}"></span>
+												</div>
+
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsServiceTag}">Assets service
+													tag</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter service tag here.."
+														th:field="*{assetsServiceTag}">
+													<span class="red" th:if="${#fields.hasErrors('assetsServiceTag')}"
+														th:errors="*{assetsServiceTag}"></span>
+												</div>
+											</div>
+
+
+
+											<div class="form-group row">
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsDescription }">Assets
+													description</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control"
+														placeholder="Enter assets description here.."
+														th:field="*{assetsDescription}">
+													<span class="red" th:if="${#fields.hasErrors('assetsDescription')}"
+														th:errors="*{assetsDescription}"></span>
+												</div>
+
+												<label class="col-lg-2 col-form-label asterisk"
+													th:text="#{global.assets.assetsaddedTime}">Added time</label>
+												<div class="col-lg-4">
+													<input type="datetime-local" class="form-control"
+														placeholder="Enter time here.." th:field="*{addedTime}">
+													<span class="red" th:if="${#fields.hasErrors('addedTime')}"
+														th:errors="*{addedTime}"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="footer">
+						<div class="pd-2">
+							<div class="row">
+								<div class="col-sm-6">
+									<a th:href="@{/activeAssetsList}" class="btn btn-outline-secondary"><em
+											class="fa fa-chevron-left"></em>
+
+									</a>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-primary2 float-right"
+										th:text="#{global.assets.save}">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+</body>
+
+</html>

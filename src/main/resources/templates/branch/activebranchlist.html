@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">               
+        <div class="container-fluid">
+			<div class="row">
+			
+			<div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0" th:text="#{global.branch.branchMst}">Branch Management</h4>                                
+                                 <div class="page-title-right">
+                                  <label>Active</label>
+                                  <div class="togglebutton">
+                                   <a th:href="@{/activeBranchList}">
+                                   <button class="btn btn-secondary active"></button></a>
+                                   <a th:href="@{/inActiveBranchList}">
+                        	       <button class="btn btn-secondary"></button></a>
+                        	       </div>
+                        	       <label>Inactive</label>                        	                             	       
+                                </div>
+                                <div class="page-title-right">
+                                 <a th:href="@{/branchForm}" class="btn add-btn plus" th:text="#{global.branch.addNew}">Add New</a>
+                                </div>
+                            </div>
+                        </div>
+			       <!--  <div class="col-lg-4">
+					<h4 class="cards-title" th:text="#{global.branch.branchMst}">Branch Management</h4>
+					</div>
+					<div class=" col-sm-4 text-center">		
+				
+                        <a th:href="@{/activeBranchList}">
+                            <button class="btn btn-secondary active" th:text="#{global.branch.activebranch}" style="margin-right:8px">Active</button></a>
+                        <a th:href="@{/inActiveBranchList}">
+                        	 <button class="btn btn-secondary" th:text="#{global.branch.inactiveBranch}">Inactive</button></a>
+                     </div>
+					<div class="col-lg-4">
+						<a th:href="@{/branchForm}" class="btn add-btn pull-right plus" th:text="#{global.branch.addNew}" >Add New</a>
+					</div>	
+					
+			
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			    </div> -->
+				
+				
+                       
+				<div class="col-sm-12 form-group">
+						<div class="card">
+							<div class="table-responsive">
+								<table id="datatable" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.branch.branchCode}">BRANCH CODE</th>
+											<th th:text="#{global.branch.branchName}">BRANCH NAME</th>
+											<th th:text="#{global.branch.address}">ADDRESS</th>
+											<th th:text="#{global.branch.city}">CITY</th>
+											<th th:text="#{global.branch.country}">COUNTRY</th>
+											<th th:text="#{global.branch.action}">ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="branch : ${listBranch}">
+											<td th:text="${branch.branchCode}"></td>
+											<td th:text="${branch.branchName}"></td>
+											<td th:text="${branch.address1}"></td>
+											<td th:text="${branch.city}"></td>
+											<td th:text="${branch.country}"></td>
+											<td>
+											<a th:href="@{branchUpdate/{branchId}(branchId=${branch.branchId})}" class="btn update"> <em class="fa-solid fa-pen-to-square"></em> </a>
+											<a th:href="@{deactiveBranch/{branchId}(branchId=${branch.branchId})}" class="btn update"> <em class="fa-solid fa-xmark"></em> </a>  
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</body>
+</html>

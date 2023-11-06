@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<form th:action="@{/between/fromortooruserIdortenantId}" method="GET"
+				onsubmit="return empSummaryListValidation()" autocomplete="off">
+				<div class="row">
+					<div class="col-12">
+						<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+							<h4 class="mb-sm-0" th:text="#{global.checkInCheckOut.dataTable}">Employee Time Summary</h4>
+							<input type="hidden" id="dtTitle" th:value="#{global.checkInCheckOut.dataTable}">
+								
+							</div>
+						</div>
+					
+
+					<div class="col-lg-12">
+						<div class="card" style="margin-bottom: 0px; padding-top:30px;">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group row">
+										<label class="col-sm-1 col-form-label asterisk"
+											th:text="#{global.checkInCheckOut.fromDate}"> From
+											Date </label>
+										<div class="col-sm-2">
+											<input class="form-control" type="datetime-local" name="from" id="date" />
+											<span class="red" id="blankMsg"></span>
+										</div>
+										<label class="col-sm-1 col-form-label asterisk"
+											th:text="#{global.checkInCheckOut.toDate}"> To Date
+										</label>
+										<div class="col-sm-2">
+											<input class="form-control" type="datetime-local" name="to" id="date1" />
+											<span class="red" id="blankMsg2"></span>
+										</div>
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.checkInCheckOut.userId}"> User Id </label>
+										<div class="col-sm-2">
+											<select class="form-control" id="empId" name="userId">
+												<option value="" selected th:text="#{global.checkInCheckOut.select}">
+													Select..
+												</option>
+												<option th:each="empId : ${empIdList}" th:value="${empId.empId}"
+													th:text="${empId.empId}" />
+											</select>
+											<span class="red" id="blankMsg3"></span>
+										</div>
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.checkInCheckOut.tenantId}"> Tenant Id </label>
+										<div class="col-sm-2">
+											<select class="form-control" id="tenantId" name="tenantId">
+												<option value="" selected th:text="#{global.checkInCheckOut.select}">
+													Select..
+												</option>
+												<option value="All">All</option>
+												<option th:each="tenantId : ${tenantIdList}" th:value="${tenantId}"
+													th:text="${tenantId}" />
+											</select>
+											<span class="red" id="blankMsg4"></span>
+										</div>
+										<div class="col-sm-12">
+											<div class="btn-group float-right">
+								<div class="btn-group float-right">
+									<button type="reset" class="btn-tab" style="margin-right:40px"><img src="../../../images/profile/reset.png" th:src="@{/images/profile/reset.png}" style="margin-right:10px" width="18px"  alt=""> Reset</button>																											
+								    <button type="submit" class="btn-tab" onclick="myFunction()"><img src="../../../images/profile/report.png" th:src="@{/images/profile/report.png}" style="margin-right:10px" width="24px"  alt=""> Generate Report</button>
+								</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-12 top">
+						<div class="card">
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.checkInCheckOut.date}">Date</th>
+											<th th:text="#{global.checkInCheckOut.userId2}">User Id</th>
+											<th th:text="#{global.checkInCheckOut.checkinActionFrom}">Checkin
+												Action From
+											</th>
+											<th th:text="#{global.checkInCheckOut.checkoutActionFrom}">Checkout
+												Action From
+											</th>
+											<th th:text="#{global.checkInCheckOut.inDateTime}">Checkin Date Time
+											</th>
+											<th th:text="#{global.checkInCheckOut.outDateTime}">Checkout Date
+												Time</th>
+											<th th:text="#{global.checkInCheckOut.day}">Day</th>
+											<th th:text="#{global.checkInCheckOut.totalTime}">Total Time</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="checkInCheckOut : ${checkInCheckOutList}">
+											<td th:text="${checkInCheckOut.date}"></td>
+											<td
+												th:text="${checkInCheckOut.userId + ' - ' + checkInCheckOut.empBasicDetails.firstName}">
+											</td>
+											<td th:text="${checkInCheckOut.checkinActionFrom}"></td>
+											<td th:text="${checkInCheckOut.checkoutActionFrom}"></td>
+											<td th:text="${checkInCheckOut.checkinDateTime}"></td>
+											<td th:text="${checkInCheckOut.checkoutDateTime}"></td>
+											<td th:text="${checkInCheckOut.dayOfTheWeek}"></td>
+											<td th:text="${checkInCheckOut.timeDuration}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="outsideButton"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

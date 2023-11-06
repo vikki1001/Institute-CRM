@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.attendance.title}">Attendance</h4>
+					</div>
+				</div>
+			</div>
+
+			
+
+			<form th:action="@{/saveCheckInAttendance}" th:object="${checkInCheckOut}" method="GET" autocomplete="off">
+				<div class="row" style="margin-top: 20px;">
+					<div class="col-xl-3 col-md-12 col-lg-12">
+						<div class="cards" style="height: 184px">
+							<div class="cards-body text-center">
+								<div class="hour_">
+									<span><img src="./images/profile/clock.gif" class="img_cla_" alt=""></span>
+									<div th:if="${flag.flag} == null"><span id="timeStart1">00:00:00</span></div>
+									<div th:if="${flag.flag} == 'Y'"><span id="timeStart">00:00:00</span></div>
+									<div th:if="${flag.flag} == 'N'"><span th:each="checkin : ${checkin}"
+											th:text="${checkin.timeDuration}">00:00:00</span></div>
+								</div>
+
+								<input type="hidden" name="checkinDateTime" th:readonly="readonly" id="checkinTime"
+									th:each="checkin : ${checkin}" th:value="${checkin.checkinDateTime}">
+
+								<div class="punch-btn-section" th:if="${flag.flag} == null"><input
+										class="btn6 btn-primary punch-btn" type="button" id="checkIn" value="Check In"
+										onclick="hideButton()"></div>
+
+								<div id="hideajaxbutton" class="punch-btn-section" th:if="${flag.flag} == 'Y'"><input
+										class="btn66 btn-primary punch-btn" type="button" id="checkOut"
+										value="Check Out"></div>
+
+								<!-- <div id="hideajaxbutton1" class="punch-btn-section"></div> -->
+								
+								<h5 class="card-title text-center" th:text="${#dates.format(date, 'dd MMMM yyyy')}"></h5>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-9 col-md-12 col-lg-12">
+
+						<div class="cards" style="height: 184px">							
+							<div class="cards-body pt-0 pb-3">
+							<h4 class="card-titles" th:text="#{global.attendance.heading}">Days Overview This Month</h4>
+								<div class="row mb-0 pb-0" style="padding:20px">
+									<div class="col-md-6 col-xl-2 text-center py-5">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_0"
+											th:text="${workingDays} - ${holidayDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.totalWorkDays}">Total
+											Working
+											Days</h5>
+									</div>
+									<div class="col-md-6 col-xl-2 text-center py-5 ">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_1"
+											th:text="${presentDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.presentDays}">Present
+											Days
+										</h5>
+									</div>
+									<div class="col-md-6 col-xl-2 text-center py-5">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_2"
+											th:text="${absentDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.absentDay}">Absent Days
+										</h5>
+									</div>
+									<div class="col-md-6 col-xl-2 text-center py-5">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_3"
+											th:text="${halfDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.halfDay}">Half Days
+										</h5>
+									</div>
+									<div class="col-md-6 col-xl-2 text-center py-5 ">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_4"
+											th:text="${lateDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.lateDay}">Late Days
+										</h5>
+									</div>
+									<div class="col-md-6 col-xl-2 text-center py-5">
+										<span class="avatar avatar-md fs-20 bg-success-transparent_5"
+											th:text="${holidayDays}">0</span>
+										<h5 class="mb-0 mt-3 size_" th:text="#{global.attendance.holidays}">Holidays
+										</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</form>
+			
+			
+			<div class="row">
+				<div class="col-xl-12 col-md-12 col-lg-12 text-center">
+					<div class="cards" style="height:auto">
+						<div class="cards-body pt-0 pb-3">
+							<div class="table-responsive">
+								<table
+									class="table table-vcenter text-nowrap table-bordered border-bottom dataTable no-footer"
+									id="emp-attendance" role="grid" aria-describedby="emp-attendance_info">
+									<thead>
+										<tr role="row">
+											<th class="border-bottom-0 sorting sorting_desc" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-sort="descending"
+												aria-label="Date: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.day}">Day
+											</th>
+											<th class="border-bottom-0 sorting" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-label="Status: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.status}">Status
+											</th>
+											<th class="border-bottom-0 sorting" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-label="Clock-In: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.checkIn}">Check-In
+											</th>
+											<th class="border-bottom-0 sorting" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-label="Clock-Out: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.checkOut}">Check-Out
+											</th>
+											<th class="border-bottom-0 sorting" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-label="Progress: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.progress}">Progress
+											</th>
+											<th class="border-bottom-0 sorting" tabindex="0"
+												aria-controls="emp-attendance" rowspan="1" colspan="1"
+												aria-label="Hours: activate to sort column ascending"
+												style="width: 500px;" th:text="#{global.attendance.hours}">Hours
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="odd">
+											<td class="sorting_1" th:text="#{global.attendance.sunday}">Sunday</td>
+											<td><span class="badge badge-orange"
+													th:text="#{global.attendance.enjoyDay}">Enjoy Your Day</span></td>
+											<td>--</td>
+											<td>--</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar-red"></div>
+												</div>
+											</td>
+											<td>--</td>
+										</tr>
+										<tr class="even" th:each="att : ${attendance}" id="somerow">
+											<td class="sorting_1"
+												th:text="${att.dayOfTheWeek} + ','+ ${#dates.format(att.createdDate, 'dd')}">
+											</td>
+
+											<td><span class="badge badge-orange" th:if="${att.status}  == 'Absent'"
+													th:text="${att.status}"></span>
+												<span class="badge badge-success" th:if="${att.status} == 'Present'"
+													th:text="${att.status}"></span>
+											</td>
+
+											<td><span th:if="${att.isActive} != '1'"
+													th:text="${att.checkinDateTime}"></span> <span
+													th:if="${att.isActive} == '1'"
+													th:text="${att.checkinDateTime}"></span></td>
+
+											<td><span th:if="${att.isActive} != '1'"
+													th:text="${att.checkoutDateTime}"></span> <span
+													th:if="${att.isActive} == '1'"
+													th:text="${att.checkoutDateTime}"></span></td>
+
+											<td>
+												<div class="progress">
+													<div th:if="${att.status} == 'Absent'" class="progress-bar-red"></div>
+														<div th:if="${att.widthForProgressBar} != null">
+														<div th:if="${att.status} == 'Present'" class="progress-Bar-Blue_" th:style="'width:' + ${att.widthForProgressBar} + '%'"></div>
+														</div>														
+												</div>
+											</td>
+											<td>
+												<div style="font-weight: bold" th:if="${att.isActive} != '1'"
+													th:text="${att.timeDuration}"></div>
+												<div style="font-weight: bold" th:if="${att.isActive} == '1'"
+													th:text="${att.timeDuration}"></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">	
+		<div class="container-fluid">
+			<div class="row">
+			
+			<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.assets.assetsheading}">Assets Management</h4>
+						<div class="page-title-right">
+							<label>Active</label>
+							<div class="togglebutton">
+								 <a th:href="@{/activeAssetsList}">
+									<button class="btn btn-secondary"></button></a>
+								  <a th:href="@{/InactiveAssetsList}">
+									<button class="btn btn-secondary active"></button></a>
+							</div>
+							<label>Inactive</label>
+						</div>
+						<div class="success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+						<div class="page-title-right">
+							<a th:href="@{/addNewAssets}" class="btn add-btn plus" 
+							th:text="#{global.assets.addNewAssets}">Add New Assets</a>
+							
+					<a th:href="@{/addNewAssetsByExcel}" class="btn add-btn plus pull-right" style="margin-right: 14px;"
+							th:text="#{global.assets.addNewAssetsByExcel}">Export Excel</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						
+							<div class="table-responsive">
+								<table id="datatable" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.assets.empId}">Employee Id</th>										
+											<th th:text="#{global.assets.assetsCode}">Assets Code</th>										
+											<th th:text="#{global.assets.assetsModel}">Assets model</th>
+											<th th:text="#{global.assets.assetsMake}">Assets make</th>									
+											<th th:text="#{global.assets.assetsServiceTag}">Assets service tag</th>										
+											<th th:text="#{global.assets.assetsaddedTime}">Added time</th>
+											<th th:text="#{global.assets.assetsDescription}">Assets description</th>
+											<th th:text="#{global.assets.assetsConfirmationStatus}">confirmation status </th>
+											<th th:text="#{global.assets.assetsAction}">Action </th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="assets : ${assetsList}">
+											<td th:text="${assets.empId} + ' - ' + ${assets.empName}"></td>
+											<td th:text="${assets.assetsCode}"></td>
+											<td th:text="${assets.assetsModel}"></td>
+											<td th:text="${assets.assetsMake}"></td>
+											<td th:text="${assets.assetsServiceTag}"></td>
+											<td th:text="${assets.addedTime}"></td>
+											<td th:text="${assets.assetsDescription}"></td>
+											<td th:text="${assets.confirmationStatus}"></td>
+											<td>
+				                            <a th:href="@{'activateAssets/' + ${assets.id}}" class="btn update"><em class="fa-solid fa-check"></em></a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

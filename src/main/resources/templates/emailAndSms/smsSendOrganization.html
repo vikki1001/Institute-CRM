@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<!-- <div class="row">
+				<div class="col-lg-12">
+				<h4 class="cards-title" >SMS SEND ORGANIZATION</h4>
+			</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div> -->
+			
+			<div class="row">	
+			<div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">SMS SEND ORGANIZATION</h4>
+          </div>
+        </div>		
+		</div>	
+
+			 <form onsubmit="return SMSOrgContactValidate()" th:action="@{/smsSendOrganization}" method="POST" th:object="${organizationContact}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">									
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.emailSendOrg.categories}">Categories</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="category" id="categorySelect" onchange="loadSubCategories()">
+													<option value="" selected th:text="#{global.emailSendOrg.select}">Select..</option>
+													<option value="Organization" th:text="#{global.emailSendOrg.organization}">Organization</option>
+													<option value="Students" th:text="#{global.emailSendOrg.students}">Students</option>
+													<option value="Students Branch" th:text="#{global.emailSendOrg.studentsBranch}">Students Branch</option>
+													<option value="Organization Employee" th:text="#{global.emailSendOrg.organizationEmployee}">Organization Employee</option>
+												</select>
+												<span class="red" id="blankMsg"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.emailSendOrg.subCategories}">Sub-Categories</label>
+											<div class="col-lg-4">
+												 <select class="form-control"  name="subCategory" id="subCategoryContainer"></select>	
+												 <span class="red" id="blankMsg2"></span>										
+											</div>
+										</div>
+																													
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.emailSendOrg.message}">Message</label>
+											<div class="col-lg-4">
+												<textarea class="form-control" rows="5" name="message" id="message" placeholder="Enter message here..."></textarea>
+												<span class="red" id="blankMsg3"></span>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="footer">
+					<div class="pd-2">
+						<div class="row">
+							<div class="col-sm-12">
+								<button type="submit" class="btn btn-primary2 float-right" th:text="#{global.emailSendOrg.send}">Send</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	
+    
+</body>
+</html>

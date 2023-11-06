@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/layout}">
+
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<form th:action="@{/empSummaryReport}" method="GET" th:object="${empBasicDetail}" autocomplete="off">
+				<div class="row">
+					<div class="col-12">
+						<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+							<h4 class="mb-sm-0" th:text="#{global.empSummReport.dataTable}">Employee Summary Report</h4>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="card" style="margin-bottom: 0px; padding-top:30px;">
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="form-group row">
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.empSummReport.empId}">Employee Id</label>
+										<div class="col-sm-2">
+											<input type="text" id="empId" name="empId" class="form-control"
+												placeholder="Enter employee id here" />
+										</div>
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.empSummReport.empName}">Employee Name</label>
+										<div class="col-sm-2">
+											<input type="text" id="fullName" name="fullName" class="form-control"
+												placeholder="Enter employee name here" />
+										</div>
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.empSummReport.department}">Department</label>
+										<div class="col-sm-2">
+											<input type="text" id="departName" name="departName" class="form-control"
+												placeholder="Enter department here" />
+										</div>
+
+										<label class="col-sm-1 col-form-label"
+											th:text="#{global.empSummReport.grade}">Grade</label>
+										<div class="col-sm-2">
+											<input type="text" id="grade" name="grade" class="form-control"
+												placeholder="Enter grade here" />
+										</div>
+										
+										<div class="col-sm-12">
+										<div class="btn-group float-right">
+											<button type="reset" class="btn-tab" style="margin-right:40px"><img
+													src="../../../images/profile/reset.png"
+													th:src="@{/images/profile/reset.png}" style="margin-right:10px"
+													width="18px" alt=""> Reset</button>
+
+											<button type="submit" class="btn-tab" onclick="myFunction()"><img
+													src="../../../images/profile/report.png"
+													th:src="@{/images/profile/report.png}" style="margin-right:10px"
+													width="24px" alt=""> Generate</button>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 top">
+						<div class="card">
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.empSummReport.empId2}">Employee Id</th>
+											<th th:text="#{global.empSummReport.empName}">Full Name</th>
+											<th th:text="#{global.empSummReport.department}">Department</th>
+											<th th:text="#{global.empSummReport.grade}">Grade</th>
+											<th th:text="#{global.empSummReport.dob}">Date Of Birth</th>
+											<th th:text="#{global.empSummReport.doj}">Date Of Joining</th>
+											<th th:text="#{global.empSummReport.repotingManager}">Reporting
+												Manager</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="report : ${empBasicList}">
+											<td th:text="${report.empId}"></td>
+											<td th:text="${report.fullName}"></td>
+											<td th:text="${report.departName}"></td>
+											<td th:text="${report.grade}"></td>
+											<td
+												th:text="${#dates.format(report.empPersonalDetails.birthDate, 'dd/MM/yyyy')}">
+											</td>
+											<td th:text="${report.empWorkDetails.dateOfJoining}"></td>
+											<td th:text="${report.empWorkDetails.reportingManager}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="outsideButton"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

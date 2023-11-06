@@ -1,0 +1,61 @@
+q	<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+			<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0" th:text="#{global.slider.title}">Sider</h4>
+						</div>
+			</div>
+			</div>
+			<form onsubmit="return sliderValidate()" th:action="@{/saveSlider}" method="POST" th:object="${slider}" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<input type="hidden" th:field="*{id}">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"  th:text="#{global.slider.uploadImage}">Upload Image</label>
+											<div class="col-lg-4">
+												<input type="file" name="image" class="form-control" th:field="*{image}" onchange="readURL(this);"></input>
+												<img id="blah" class = "img1" >
+											<span class="red" id="blankMsg"></span>
+											</div>
+											
+											<label class="col-lg-2 col-form-label asterisk"  th:text="#{global.slider.description}">Description</label>
+											<div class="col-lg-4">
+												<input class="form-control" placeholder="Enter description here..." id="imageDescription" th:field="*{imageDescription}"></input>
+											<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>																	
+																											
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+								<div class="footer">
+<div class="pd-2">
+	<div class="row">
+		<div class="col-sm-6">
+			<a th:href="@{/activeSliderList}" class="btn btn-outline-secondary"><em class="fa fa-chevron-left"></em>
+							</a>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-primary2 float-right" th:text="#{global.slider.submit}">Submit</button>
+		</div>
+	</div>
+</div>
+</div>
+			</form>
+			
+		</div>
+	</div>
+</body>
+</html>
